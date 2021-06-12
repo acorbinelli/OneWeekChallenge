@@ -1,0 +1,15 @@
+.NavButton {
+  border: none;
+  background-color: white;
+  color: black;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.DefaultButtonStyle {
+  border: none;
+  background-color: red;
+  color: black;
+  margin: 0.5rem 1rem;
+}
