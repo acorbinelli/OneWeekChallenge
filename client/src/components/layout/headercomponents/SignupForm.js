@@ -1,15 +1,20 @@
 import classes from "./SignupForm.module.css"
-import React from "react"
+import React, { useContext } from "react"
 import Modal from "../../UI/Modal"
+import Button from "../../UI/Button"
 
-const SignupForm = ({ handler }) => {
+import { AuthContext } from "../../store/AuthContext"
+
+const SignupForm = ({ handler, header }) => {
+  const { userInfo, setUserInfo } = useContext(AuthContext)
+
+  const setSignupFormHandler = () => {
+    setUserInfo({ ...userInfo, isloggedin: true })
+    header.setHeaderState({ ...header.headerState, signupform: false })
+  }
   return (
     <Modal handler={handler}>
-      <h1>PIPI</h1>
-      <h1>PIPI</h1>
-      <h1>PIPI</h1>
-      <h1>PIPI</h1>
-      <h1>PIPI</h1>
+      <Button onClick={setSignupFormHandler}>Sign Up</Button>
     </Modal>
   )
 }

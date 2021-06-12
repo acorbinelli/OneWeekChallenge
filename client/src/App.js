@@ -7,7 +7,7 @@ import Header from "./components/layout/Header"
 function App() {
   //to be replaced by JWT logic
   const [userInfo, setUserInfo] = useState({
-    isloggedin: true,
+    isloggedin: false,
     email: "johndoe@oneweekchallenge.com",
   })
   return (

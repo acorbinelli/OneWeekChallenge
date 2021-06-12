@@ -6,9 +6,10 @@ import Navbar from "./headercomponents/Navbar"
 import Logo from "./headercomponents/Logo"
 import Auth from "./headercomponents/Auth"
 import Button from "../UI/Button"
-import Modal from "../UI/Modal"
+
 import LoginForm from "./headercomponents/LoginForm"
 import SignupForm from "./headercomponents/SignupForm"
+import Profile from "./headercomponents/Profile"
 
 const Header = () => {
   const [headerState, setHeaderState] = useState({
@@ -46,21 +47,24 @@ const Header = () => {
   return (
     <Fragment>
       {headerState.loginform && (
-        <LoginForm handler={setLoginHeaderStateHandler} />
+        <LoginForm
+          handler={setLoginHeaderStateHandler}
+          header={{ headerState, setHeaderState }}
+        />
       )}
 
       {headerState.signupform && (
-        <SignupForm handler={setSignupHeaderStateHandler} />
+        <SignupForm
+          handler={setSignupHeaderStateHandler}
+          header={{ headerState, setHeaderState }}
+        />
       )}
 
       {headerState.profile && (
-        <Modal close={setProfileHeaderStateHandler}>
-          <h1>lala</h1>
-          <h1>lala</h1>
-          <h1>lala</h1>
-          <h1>lala</h1>
-          <h1>lala</h1>
-        </Modal>
+        <Profile
+          handler={setProfileHeaderStateHandler}
+          header={{ headerState, setHeaderState }}
+        />
       )}
 
       <Navbar>
