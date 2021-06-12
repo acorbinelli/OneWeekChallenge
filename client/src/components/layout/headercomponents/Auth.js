@@ -1,6 +1,5 @@
-import React from "react"
+import React, { Fragment } from "react"
 import classes from "./Auth.module.css"
-import Modal from "../../UI/Modal"
 
 const Auth = (props) => {
   return <div className={classes.auth}>{props.children}</div>

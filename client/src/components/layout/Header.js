@@ -7,11 +7,14 @@ import Logo from "./headercomponents/Logo"
 import Auth from "./headercomponents/Auth"
 import Button from "../UI/Button"
 import Modal from "../UI/Modal"
+import LoginForm from "./headercomponents/LoginForm"
+import SignupForm from "./headercomponents/SignupForm"
 
 const Header = () => {
   const [headerState, setHeaderState] = useState({
     loginform: false,
     signupform: false,
+    profile: false,
   })
 
   const { userInfo, setUserInfo } = useContext(AuthContext)
@@ -34,25 +37,29 @@ const Header = () => {
       : setHeaderState({ ...headerState, signupform: true })
   }
 
+  const setProfileHeaderStateHandler = () => {
+    headerState.profile
+      ? setHeaderState({ ...headerState, profile: false })
+      : setHeaderState({ ...headerState, profile: true })
+  }
+
   return (
     <Fragment>
       {headerState.loginform && (
-        <Modal close={setLoginHeaderStateHandler}>
-          <h1>CACA</h1>
-          <h1>CACA</h1>
-          <h1>CACA</h1>
-          <h1>CACA</h1>
-          <h1>CACA</h1>
-        </Modal>
+        <LoginForm handler={setLoginHeaderStateHandler} />
       )}
 
       {headerState.signupform && (
-        <Modal close={setSignupHeaderStateHandler}>
-          <h1>PIPI</h1>
-          <h1>PIPI</h1>
-          <h1>PIPI</h1>
-          <h1>PIPI</h1>
-          <h1>PIPI</h1>
+        <SignupForm handler={setSignupHeaderStateHandler} />
+      )}
+
+      {headerState.profile && (
+        <Modal close={setProfileHeaderStateHandler}>
+          <h1>lala</h1>
+          <h1>lala</h1>
+          <h1>lala</h1>
+          <h1>lala</h1>
+          <h1>lala</h1>
         </Modal>
       )}
 
@@ -64,10 +71,13 @@ const Header = () => {
         <Auth>
           {userInfo.isloggedin ? (
             <Fragment>
-              <Button classType='secondary'>
+              <Button
+                onClick={setProfileHeaderStateHandler}
+                classType='secondary'
+              >
                 <i className='fas fa-user-circle'></i>
               </Button>
-              <h1>{userInfo.email}</h1>
+              <h1 onClick={setProfileHeaderStateHandler}>{userInfo.email}</h1>
             </Fragment>
           ) : (
             <Fragment>
