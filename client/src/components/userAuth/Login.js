@@ -2,23 +2,17 @@ import React, { Fragment, useState } from "react"
 import Modal from "../UI/Modal"
 import Button from "../UI/Button"
 
-const Login = () => {
-  const [showLoginOptions, setShowLoginOptions] = useState(false)
-
-  const showLoginOptionsHandler = (event) => {
-    event.preventDefault()
-    console.log("show")
-    setShowLoginOptions(true)
+const Login = ({ showNav, hideNavHandler, showNavHandler }) => {
+  const showLoginOptionsHandler = () => {
+    showNavHandler()
   }
-  const hideLoginOptionsHandler = (event) => {
-    event.preventDefault()
-    console.log("hide")
-    setShowLoginOptions(false)
+  const hideLoginOptionsHandler = () => {
+    hideNavHandler()
   }
 
   return (
     <Fragment>
-      {!showLoginOptions && (
+      {!showNav && (
         <Button
           type='submit'
           text='Log In'
@@ -26,9 +20,7 @@ const Login = () => {
           action={showLoginOptionsHandler}
         />
       )}
-      {showLoginOptions && (
-        <Modal action={hideLoginOptionsHandler}>Log in</Modal>
-      )}
+      {showNav && <Modal action={hideLoginOptionsHandler}>Log in</Modal>}
     </Fragment>
   )
 }

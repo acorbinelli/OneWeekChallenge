@@ -17,13 +17,11 @@ const Navbar = () => {
     setIsLoggedIn(false)
   }
 
-  const showNavHandler = (event) => {
-    event.preventDefault()
+  const showNavHandler = () => {
     setShowNav(true)
   }
 
-  const hideNavHandler = (event) => {
-    event.preventDefault()
+  const hideNavHandler = () => {
     setShowNav(false)
   }
 
