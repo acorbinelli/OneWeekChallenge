@@ -3,6 +3,7 @@
   cursor: pointer;
   transition: 0.3s all;
   letter-spacing: 0.3rem;
+  border-radius: 5px;
 }
 .logo * {
   padding: 0.5rem 0.5rem;

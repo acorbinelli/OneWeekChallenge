@@ -64,10 +64,10 @@ const Header = () => {
         <Auth>
           {userInfo.isloggedin ? (
             <Fragment>
-              <h1>{userInfo.email}</h1>
               <Button classType='secondary'>
                 <i className='fas fa-user-circle'></i>
               </Button>
+              <h1>{userInfo.email}</h1>
             </Fragment>
           ) : (
             <Fragment>
