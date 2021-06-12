@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://oneweekuser:oneweekpassword@oneweekchallengedb.eohox.mongodb.net/oneWeekChallengeDB?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://oneweekuser:oneweekpassword@oneweekchallengedb.eohox.mongodb.net/oneWeekChallengeDB?retryWrites=true&w=majority",
+  "jwtSecret": "cziczi"
 }
