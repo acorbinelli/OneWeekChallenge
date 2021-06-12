@@ -1,0 +1,26 @@
+.logo {
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.3s all;
+  letter-spacing: 0.3rem;
+}
+.logo * {
+  padding: 0.5rem 0.5rem;
+  display: inline-block;
+}
+
+.logo *:not(:last-child) {
+  margin-left: 1rem;
+}
+.logo *:last-child {
+  margin-right: 1rem;
+}
+
+.logo i {
+  font-size: 1.5rem;
+}
+
+.logo:hover {
+  background-color: rgb(66, 148, 255);
+  color: white;
+}

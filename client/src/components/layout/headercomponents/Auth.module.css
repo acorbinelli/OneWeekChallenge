@@ -1,0 +1,20 @@
+.auth {
+  margin-right: 1rem;
+  color: black;
+  font-size: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.auth * {
+  padding: 0.5rem 1rem;
+}
+
+.auth h1 {
+  cursor: pointer;
+  transition: 0.3s all;
+  letter-spacing: 0.2rem;
+}
+.auth h1:hover {
+  background-color: rgb(66, 148, 255);
+  color: white;
+}
