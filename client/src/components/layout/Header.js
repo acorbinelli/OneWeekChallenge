@@ -1,7 +1,5 @@
 import React, { Fragment, useState, useContext } from "react"
-//context
-import { AuthContext } from "../store/AuthContext"
-//components
+
 import Navbar from "../header-components/Navbar"
 import Logo from "../header-components/Logo"
 import Auth from "../header-components/Auth"
@@ -10,6 +8,7 @@ import Button from "../UI/Button"
 import LoginForm from "../header-components/LoginForm"
 import SignupForm from "../header-components/SignupForm"
 import Profile from "../header-components/Profile"
+import authContext from "../store/authContext"
 
 const Header = () => {
   const [headerState, setHeaderState] = useState({
@@ -18,13 +17,7 @@ const Header = () => {
     profile: false,
   })
 
-  const { userInfo, setUserInfo } = useContext(AuthContext)
-
-  //set logged in state for user
-  /*  const setLoggedInUserHandler = () => {
-    setUserInfo({ ...userInfo, isloggedin: true })
-    console.log(userInfo)
-  } */
+  const { isAuthenticated, email } = useContext(authContext)
 
   const showLoginForm = () => {
     headerState.loginform
@@ -73,12 +66,12 @@ const Header = () => {
           <i className='far fa-calendar-alt'></i>
         </Logo>
         <Auth>
-          {userInfo.isloggedin ? (
+          {isAuthenticated ? (
             <Fragment>
               <Button onClick={showProfileForm} classType='secondary'>
                 <i className='fas fa-user-circle'></i>
               </Button>
-              <h1 onClick={showProfileForm}>{userInfo.email}</h1>
+              <h1 onClick={showProfileForm}>{email}</h1>
             </Fragment>
           ) : (
             <Fragment>

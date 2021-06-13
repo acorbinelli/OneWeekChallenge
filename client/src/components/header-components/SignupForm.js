@@ -6,13 +6,13 @@ import Input from "../UI/Input"
 
 import Logo from "./Logo"
 
-import { AuthContext } from "../store/AuthContext"
+//import { AuthContext } from "../store/authContext"
 
 const SignupForm = ({ toggle, header }) => {
-  const { userInfo, setUserInfo } = useContext(AuthContext)
+  // const { userInfo, setUserInfo } = useContext(AuthContext)
 
   const setUserSignupHandler = () => {
-    setUserInfo({ ...userInfo, isloggedin: true })
+    // setUserInfo({ ...userInfo, isloggedin: true })
     toggle()
   }
   return (

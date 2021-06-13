@@ -1,6 +1,4 @@
 import { createContext } from "react"
+const authContext = createContext({})
 
-export const AuthContext = createContext({
-  isloggedin: true,
-  setloggedin: (value) => {},
-})
+export default authContext

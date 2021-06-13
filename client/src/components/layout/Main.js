@@ -1,14 +1,14 @@
 import React, { useContext, Fragment } from "react"
 import Hero from "../main-components/Hero"
-import { AuthContext } from "../store/AuthContext"
+import authContext from "../store/authContext"
 
 const Main = () => {
-  const { userInfo, setUserInfo } = useContext(AuthContext)
+  //  const { userInfo, setUserInfo } = useContext(authContext)
 
   return (
     <main>
-      <Hero isloggedin={userInfo.isloggedin}>
-        {userInfo.isloggedin ? (
+      <Hero>
+        {true ? (
           <div>something else</div>
         ) : (
           <div>

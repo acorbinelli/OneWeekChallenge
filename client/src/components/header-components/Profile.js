@@ -8,12 +8,12 @@ import Input from "../UI/Input"
 
 import Logo from "./Logo"
 
-import { AuthContext } from "../store/AuthContext"
+//import { AuthContext } from "../store/authContext"
 
 const Profile = ({ toggle, header }) => {
-  const { userInfo, setUserInfo } = useContext(AuthContext)
+  //const { userInfo, setUserInfo } = useContext(AuthContext)
   const setUserInfoHandler = () => {
-    setUserInfo({ ...userInfo, isloggedin: false })
+    // setUserInfo({ ...userInfo, isloggedin: false })
     toggle()
   }
 
@@ -24,11 +24,11 @@ const Profile = ({ toggle, header }) => {
         <i className='far fa-calendar-alt'></i>
       </Logo>
       <form className={classes.profile}>
-        <Input type='text' value={userInfo.name} disabled={false}></Input>
+        <Input type='text' value='{userInfo.name}' disabled={false}></Input>
 
-        <Input type='text' value={userInfo.surname} disabled={false} />
-        <Input type='email' value={userInfo.email} disabled={true} />
-        <Input type='phone' value={userInfo.phone} disabled={false} />
+        <Input type='text' value='{userInfo.surname}' disabled={false} />
+        <Input type='email' value='{userInfo.email}' disabled={true} />
+        <Input type='phone' value='{userInfo.phone}' disabled={false} />
         <Input type='password' value='Old Password' disabled={false} />
         <Input type='password' value='New Password' disabled={false} />
         <Input type='password' value='Confirm Password' disabled={false} />

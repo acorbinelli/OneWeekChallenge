@@ -29,13 +29,17 @@ router.get("/", auth, async (req, res) => {
 router.post(
   "/",
   [
-    check("email", "Please include a valid email").isEmail(),
-    check("password", "Password is required").exists(),
+    check("email", "Email Required").isEmail(),
+    check("email", "Please include a valid company email").contains(
+      "oneweekchallengeapp.com"
+    ),
+
+    check("password", "Password is required").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(400).json({ msg: errors.array() })
     }
 
     const { email, password } = req.body
@@ -64,7 +68,8 @@ router.post(
         { expiresIn: 3600 },
         (err, token) => {
           if (err) throw err
-          res.json({ token })
+
+          res.json({ token: token, id: user.id })
         }
       )
     } catch (err) {

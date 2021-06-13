@@ -2,28 +2,29 @@ import classes from "./Input.module.css"
 
 import React from "react"
 
+//class selection
+const primaryClass = classes.input
+const secondaryClass = classes["input-secondary"]
+const selectClass = (classType) => {
+  switch (classType) {
+    case "primary":
+      return primaryClass
+    case "secondary":
+      return secondaryClass
+    default:
+      return primaryClass
+  }
+}
+
 const Input = ({
   type,
+  value,
   placeholder,
   classType,
   disabled,
-  value,
   handler,
   onEnter,
 }) => {
-  const primaryClass = classes.input
-  const secondaryClass = classes["input-secondary"]
-  const selectClass = (classType) => {
-    switch (classType) {
-      case "primary":
-        return primaryClass
-      case "secondary":
-        return secondaryClass
-      default:
-        return primaryClass
-    }
-  }
-
   const updateHandler = (event) => {
     handler({ [type]: event.target.value })
   }
