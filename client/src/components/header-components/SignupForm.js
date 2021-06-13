@@ -13,7 +13,7 @@ const SignupForm = ({ toggle, header }) => {
 
   const setUserSignupHandler = () => {
     setUserInfo({ ...userInfo, isloggedin: true })
-    header.setHeaderState({ ...header.headerState, signupform: false })
+    toggle()
   }
   return (
     <Modal toggle={toggle}>
