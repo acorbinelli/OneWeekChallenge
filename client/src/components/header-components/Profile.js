@@ -14,7 +14,7 @@ const Profile = ({ toggle, header }) => {
   const { userInfo, setUserInfo } = useContext(AuthContext)
   const setUserInfoHandler = () => {
     setUserInfo({ ...userInfo, isloggedin: false })
-    header.setHeaderState({ ...header.headerState, profile: false })
+    toggle()
   }
 
   return (

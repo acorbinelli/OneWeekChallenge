@@ -3,12 +3,13 @@
   border: 1px solid black;
 }
 .input::placeholder {
-  color: rgb(57, 63, 71);
+  color: rgba(57, 63, 71, 0.5);
 }
 
 .input:hover {
   background-color: rgb(66, 148, 255);
   border: 1px solid white;
+  color: white;
 }
 .input:hover::placeholder {
   color: white;
@@ -16,6 +17,7 @@
 
 .input:focus {
   background-color: rgb(216, 233, 255);
+  color: black;
 }
 .input:focus::placeholder {
   color: transparent;

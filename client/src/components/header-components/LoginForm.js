@@ -13,6 +13,10 @@ import { AuthContext } from "../store/AuthContext"
 const LoginForm = ({ toggle, header }) => {
   const { userInfo, setUserInfo } = useContext(AuthContext)
 
+  const setUserInfoHandler = (data) => {
+    setUserInfo({ ...userInfo, ...data })
+  }
+
   const setUserLoginHandler = () => {
     //JWT logic set isloggedin
     setUserInfo({ ...userInfo, isloggedin: true })
@@ -31,12 +35,15 @@ const LoginForm = ({ toggle, header }) => {
           placeholder='email'
           classType='primary'
           disabled={false}
+          handler={setUserInfoHandler}
         />
         <Input
           type='password'
           placeholder='password'
           classType='primary'
           disabled={false}
+          handler={setUserInfoHandler}
+          onEnter={setUserLoginHandler}
         />
       </form>
       <nav>
