@@ -1,7 +1,6 @@
 .modal {
   position: absolute;
-  width: 40rem;
-  height: 30rem;
+  padding: 2rem 2rem;
   background-color: white;
   z-index: 400;
   top: 50%;
@@ -12,6 +11,9 @@
   align-items: center;
 }
 .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .backdrop {

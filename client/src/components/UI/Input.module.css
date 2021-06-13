@@ -1,0 +1,30 @@
+.input {
+  background-color: white;
+  border: 1px solid black;
+}
+.input::placeholder {
+  color: rgb(57, 63, 71);
+}
+
+.input:hover {
+  background-color: rgb(66, 148, 255);
+  border: 1px solid white;
+}
+.input:hover::placeholder {
+  color: white;
+}
+
+.input:focus {
+  background-color: rgb(216, 233, 255);
+}
+.input:focus::placeholder {
+  color: transparent;
+}
+
+.input:disabled {
+  background-color: rgb(185, 185, 185);
+}
+
+.input-secondary {
+  background-color: red;
+}

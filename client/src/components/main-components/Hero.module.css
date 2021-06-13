@@ -1,0 +1,41 @@
+.secondary {
+  height: 80vh;
+  width: 100vw;
+  background-image: linear-gradient(
+      to bottom right,
+      rgba(0, 174, 255, 0.363),
+      rgba(0, 0, 0, 0.767)
+    ),
+    url("../../img/hero-1.jpg");
+  background-position-y: 30%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.primary {
+  height: 80vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.secondary h1 {
+  color: white;
+  font-weight: 900;
+  letter-spacing: 0.3rem;
+  font-size: 5rem;
+}
+
+.secondary h3 {
+  color: white;
+  font-weight: 300;
+  letter-spacing: 0.3rem;
+  font-size: 2rem;
+}

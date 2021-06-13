@@ -2,14 +2,14 @@ import React, { Fragment, useState, useContext } from "react"
 //context
 import { AuthContext } from "../store/AuthContext"
 //components
-import Navbar from "./headercomponents/Navbar"
-import Logo from "./headercomponents/Logo"
-import Auth from "./headercomponents/Auth"
+import Navbar from "../header-components/Navbar"
+import Logo from "../header-components/Logo"
+import Auth from "../header-components/Auth"
 import Button from "../UI/Button"
 
-import LoginForm from "./headercomponents/LoginForm"
-import SignupForm from "./headercomponents/SignupForm"
-import Profile from "./headercomponents/Profile"
+import LoginForm from "../header-components/LoginForm"
+import SignupForm from "../header-components/SignupForm"
+import Profile from "../header-components/Profile"
 
 const Header = () => {
   const [headerState, setHeaderState] = useState({
@@ -26,19 +26,19 @@ const Header = () => {
     console.log(userInfo)
   } */
 
-  const setLoginHeaderStateHandler = () => {
+  const showLoginForm = () => {
     headerState.loginform
       ? setHeaderState({ ...headerState, loginform: false })
       : setHeaderState({ ...headerState, loginform: true })
   }
 
-  const setSignupHeaderStateHandler = () => {
+  const showSignupForm = () => {
     headerState.signupform
       ? setHeaderState({ ...headerState, signupform: false })
       : setHeaderState({ ...headerState, signupform: true })
   }
 
-  const setProfileHeaderStateHandler = () => {
+  const showProfileForm = () => {
     headerState.profile
       ? setHeaderState({ ...headerState, profile: false })
       : setHeaderState({ ...headerState, profile: true })
@@ -48,21 +48,21 @@ const Header = () => {
     <Fragment>
       {headerState.loginform && (
         <LoginForm
-          handler={setLoginHeaderStateHandler}
+          toggle={showLoginForm}
           header={{ headerState, setHeaderState }}
         />
       )}
 
       {headerState.signupform && (
         <SignupForm
-          handler={setSignupHeaderStateHandler}
+          toggle={showSignupForm}
           header={{ headerState, setHeaderState }}
         />
       )}
 
       {headerState.profile && (
         <Profile
-          handler={setProfileHeaderStateHandler}
+          toggle={showProfileForm}
           header={{ headerState, setHeaderState }}
         />
       )}
@@ -75,20 +75,17 @@ const Header = () => {
         <Auth>
           {userInfo.isloggedin ? (
             <Fragment>
-              <Button
-                onClick={setProfileHeaderStateHandler}
-                classType='secondary'
-              >
+              <Button onClick={showProfileForm} classType='secondary'>
                 <i className='fas fa-user-circle'></i>
               </Button>
-              <h1 onClick={setProfileHeaderStateHandler}>{userInfo.email}</h1>
+              <h1 onClick={showProfileForm}>{userInfo.email}</h1>
             </Fragment>
           ) : (
             <Fragment>
-              <Button classType='primary' onClick={setLoginHeaderStateHandler}>
+              <Button classType='primary' onClick={showLoginForm}>
                 Log In
               </Button>
-              <Button classType='primary' onClick={setSignupHeaderStateHandler}>
+              <Button classType='primary' onClick={showSignupForm}>
                 Sign Up
               </Button>
             </Fragment>
