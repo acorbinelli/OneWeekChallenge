@@ -1,5 +1,5 @@
 import "./App.css"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { AuthContext } from "./components/store/AuthContext"
 
 import Header from "./components/layout/Header"
@@ -9,11 +9,35 @@ function App() {
   //to be replaced by JWT logic
   const [userInfo, setUserInfo] = useState({
     isloggedin: false,
-    email: "johndoe@oneweekchallenge.com",
-    name: "John",
-    surname: "Doe",
-    phone: "0040730220439",
+    email: "",
+    name: "",
+    surname: "",
+    phone: "",
+    password: "",
+    id: "",
   })
+
+  const { isloggedin } = userInfo
+  //clean userInfo state
+  useEffect(() => {
+    !isloggedin
+      ? setUserInfo({
+          ...userInfo,
+          email: "",
+          name: "",
+          surname: "",
+          phone: "",
+          password: "",
+          id: "",
+        })
+      : setUserInfo({
+          ...userInfo,
+          password: "",
+        })
+    //BUG
+    // eslint-disable-next-line
+  }, [isloggedin])
+
   return (
     <AuthContext.Provider value={{ userInfo, setUserInfo }}>
       <Header />
