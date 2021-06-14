@@ -1,4 +1,6 @@
-import React, { Fragment, useState, useContext } from "react"
+import React, { Fragment, useState, useContext, useEffect } from "react"
+
+import Cookies from "universal-cookie"
 
 import Navbar from "../header-components/Navbar"
 import Logo from "../header-components/Logo"
@@ -8,6 +10,7 @@ import Button from "../UI/Button"
 import LoginForm from "../header-components/LoginForm"
 import SignupForm from "../header-components/SignupForm"
 import Profile from "../header-components/Profile"
+
 import authContext from "../store/authContext"
 
 const Header = () => {
@@ -15,9 +18,14 @@ const Header = () => {
     loginform: false,
     signupform: false,
     profile: false,
+    email: "",
   })
 
-  const { isAuthenticated, email } = useContext(authContext)
+  const { isAuthenticated, getUserInfo, email } = useContext(authContext)
+
+  useEffect(() => {
+    isAuthenticated && getUserInfo()
+  }, [isAuthenticated])
 
   const showLoginForm = () => {
     headerState.loginform

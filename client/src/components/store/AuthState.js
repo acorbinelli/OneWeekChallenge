@@ -9,6 +9,7 @@ import {
   LOGOUT,
   LOGIN_ERROR,
   USER_LOAD,
+  GET_USER,
 } from "../types"
 
 const AuthState = (props) => {
@@ -16,6 +17,10 @@ const AuthState = (props) => {
     isAuthenticated: null,
     id: "",
     token: "",
+    email: "",
+    name: "",
+    surname: "",
+    phone: "",
     error: [],
   }
 
@@ -43,13 +48,32 @@ const AuthState = (props) => {
     }
   }
 
+  //get user info
+  const getUserInfo = async () => {
+    const config = {
+      headers: { "x-auth-token": state.token },
+    }
+    try {
+      let res = await axios.get("http://localhost:5000/api/auth", config)
+      dispatch({ type: GET_USER, payload: res.data })
+    } catch (err) {
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data.msg })
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
         id: state.id,
         isAuthenticated: state.isAuthenticated,
+        name: state.name,
+        surname: state.surname,
+        phone: state.phone,
         token: state.token,
+        error: state.error,
+        email: state.email,
         loginUser,
+        getUserInfo,
       }}
     >
       {props.children}
