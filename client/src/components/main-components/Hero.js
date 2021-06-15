@@ -5,11 +5,13 @@ const Hero = (props) => {
   const primaryClass = classes.primary
   const secondaryClass = classes.secondary
 
-  const selectClass = (isloggedin) => {
-    return isloggedin ? primaryClass : secondaryClass
+  const selectClass = (isAuthenticated) => {
+    return isAuthenticated ? primaryClass : secondaryClass
   }
 
-  return <div className={selectClass(props.isloggedin)}>{props.children}</div>
+  return (
+    <div className={selectClass(props.isAuthenticated)}>{props.children}</div>
+  )
 }
 
 export default Hero

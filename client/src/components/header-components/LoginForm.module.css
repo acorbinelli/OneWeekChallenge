@@ -5,3 +5,10 @@
   margin-bottom: 1rem;
   width: 100%;
 }
+
+.error {
+  color: red;
+  font-weight: 200;
+  letter-spacing: 0.3rem;
+  font-size: 1.2rem;
+}

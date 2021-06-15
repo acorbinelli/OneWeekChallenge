@@ -1,7 +1,5 @@
 import React, { Fragment, useState, useContext, useEffect } from "react"
 
-import Cookies from "universal-cookie"
-
 import Navbar from "../header-components/Navbar"
 import Logo from "../header-components/Logo"
 import Auth from "../header-components/Auth"
@@ -21,25 +19,29 @@ const Header = () => {
     email: "",
   })
 
-  const { isAuthenticated, getUserInfo, email } = useContext(authContext)
+  const { isAuthenticated, getUserProfileData, email, clearAuthErrors } =
+    useContext(authContext)
 
   useEffect(() => {
-    isAuthenticated && getUserInfo()
+    isAuthenticated && getUserProfileData()
   }, [isAuthenticated])
 
   const showLoginForm = () => {
+    clearAuthErrors()
     headerState.loginform
       ? setHeaderState({ ...headerState, loginform: false })
       : setHeaderState({ ...headerState, loginform: true })
   }
 
   const showSignupForm = () => {
+    clearAuthErrors()
     headerState.signupform
       ? setHeaderState({ ...headerState, signupform: false })
       : setHeaderState({ ...headerState, signupform: true })
   }
 
   const showProfileForm = () => {
+    clearAuthErrors()
     headerState.profile
       ? setHeaderState({ ...headerState, profile: false })
       : setHeaderState({ ...headerState, profile: true })

@@ -13,9 +13,10 @@ import authContext from "../store/authContext"
 //import { AuthContext } from "../store/authContext"
 
 const Profile = ({ toggle }) => {
-  const { name, surname, email, phone } = useContext(authContext)
+  const { name, surname, email, phone, userLogout } = useContext(authContext)
 
   const setUserInfoHandler = () => {
+    userLogout()
     toggle()
   }
 

@@ -3,61 +3,101 @@ import AuthContext from "./authContext"
 import AuthReducer from "./authReducer"
 import axios from "axios"
 import {
-  LOGIN_SUCCESS,
-  LOGIN_REQUEST,
-  LOGIN_FAIL,
-  LOGOUT,
-  LOGIN_ERROR,
-  USER_LOAD,
-  GET_USER,
+  USER_LOGIN,
+  USER_LOGIN_FAIL,
+  USER_LOGOUT,
+  GET_USER_COOKIES,
+  GET_USER_PROFILE_DATA,
+  GET_USER_PROFILE_DATA_FAIL,
+  CLEAR_AUTH_ERRORS,
 } from "../types"
 
 const AuthState = (props) => {
   const initialState = {
-    isAuthenticated: null,
+    isAuthenticated: false,
     id: "",
     token: "",
     email: "",
     name: "",
     surname: "",
     phone: "",
-    error: [],
+    error: "",
   }
 
   const [state, dispatch] = useReducer(AuthReducer, initialState)
 
-  //check if logged in
-  const checkForCredentials = async () => {
-    dispatch({ type: USER_LOAD, payload: "" })
-  }
   useEffect(() => {
-    checkForCredentials()
+    getUserCookies()
   }, [])
 
-  //send login request
-  const loginUser = async (object) => {
-    const config = {
-      headers: { "Content-Type": "application/json" },
-    }
-    let res = {}
+  //HTTP Requests AXIOS + dispatching to AuthContext
+
+  //SUBJECT: User Login
+  const userLogin = async (userInput) => {
     try {
-      res = await axios.post("http://localhost:5000/api/auth", object, config)
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data })
+      const res = await axios.post("http://localhost:5000/api/login", {
+        ...userInput,
+      })
+
+      dispatch({ type: USER_LOGIN, payload: res.data })
     } catch (err) {
-      dispatch({ type: LOGIN_FAIL, payload: err.response.data.msg })
+      dispatch({ type: USER_LOGIN_FAIL, payload: err.response.data.msg })
     }
   }
 
-  //get user info
-  const getUserInfo = async () => {
+  const getUserProfileData = async () => {
     const config = {
-      headers: { "x-auth-token": state.token },
+      headers: {
+        "x-auth-token": state.token,
+      },
     }
     try {
-      let res = await axios.get("http://localhost:5000/api/auth", config)
-      dispatch({ type: GET_USER, payload: res.data })
+      const res = await axios.get("http://localhost:5000/api/user", config)
+
+      dispatch({ type: GET_USER_PROFILE_DATA, payload: res.data })
     } catch (err) {
-      dispatch({ type: LOGIN_FAIL, payload: err.response.data.msg })
+      dispatch({
+        type: GET_USER_PROFILE_DATA_FAIL,
+        payload: err.response.data.msg,
+      })
+    }
+  }
+
+  const getUserCookies = async () => {
+    try {
+      await dispatch({ type: GET_USER_COOKIES, payload: "" })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const userLogout = async () => {
+    try {
+      await dispatch({ type: USER_LOGOUT, payload: "" })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  //SUBJECT: User Signup
+  //TODO:
+  const userSignup = async (userInput) => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/login", {
+        ...userInput,
+      })
+
+      dispatch({ type: USER_LOGIN, payload: res.data })
+    } catch (err) {
+      dispatch({ type: USER_LOGIN_FAIL, payload: err.response.data.msg })
+    }
+  }
+
+  const clearAuthErrors = async () => {
+    try {
+      await dispatch({ type: CLEAR_AUTH_ERRORS, payload: "" })
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -72,8 +112,11 @@ const AuthState = (props) => {
         token: state.token,
         error: state.error,
         email: state.email,
-        loginUser,
-        getUserInfo,
+        userLogin,
+        getUserProfileData,
+        getUserCookies,
+        userLogout,
+        clearAuthErrors,
       }}
     >
       {props.children}
