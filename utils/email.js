@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer")
 require("dotenv").config()
 
-module.exports = async function Email() {
+module.exports = async function Email(data) {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   console.log("sending email")
@@ -17,11 +17,11 @@ module.exports = async function Email() {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"OneWeekChallengeApp" <alessandro@corbyart.digital>', // sender address
-    to: "<acorbinelli@gmail.com>", // list of receivers
+    from: `"OneWeekChallengeApp" <${process.env.EMAIL_ACCOUNT}>`, // sender address
+    to: `<${data.destination}>`, // list of receivers
     subject: "Please Confirm your account", // Subject line
-    text: "Link here", // plain text body
-    html: "<b>Link Here</b>", // html body
+    text: "Click here to confirm your OneWeekChallengeApp acoount", // plain text body
+    html: `<a href="${data.link}">Click here to confirm your OneWeekChallengeApp acoount</a>`, // html body
   })
 
   console.log("Message sent: %s", info.messageId)

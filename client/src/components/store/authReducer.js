@@ -17,8 +17,6 @@ const authReducer = (state, action) => {
   switch (action.type) {
     //SUBJECT:store token and id in cookies
     case USER_LOGIN:
-      console.log("Logged in")
-
       cookies.set("jwt", action.payload.token, {
         path: "/",
         maxAge: 360,
@@ -27,7 +25,7 @@ const authReducer = (state, action) => {
         path: "/",
         maxAge: 360,
       })
-      console.log("Stored cookies")
+
       return {
         ...state,
         id: action.payload.id,
@@ -36,7 +34,6 @@ const authReducer = (state, action) => {
         error: "",
       }
     case USER_LOGIN_FAIL:
-      console.log("Error logging in")
       return {
         ...state,
         token: "",
@@ -62,7 +59,6 @@ const authReducer = (state, action) => {
 
     //SUBJECT:signup user and store jwt and id in state
     case USER_SIGNUP:
-      console.log("Signup User")
       cookies.set("jwt", action.payload.token, {
         path: "/",
         maxAge: 360,
@@ -77,7 +73,6 @@ const authReducer = (state, action) => {
         token: action.payload.token,
       }
     case USER_SIGNUP_FAIL:
-      console.log("Error signing up")
       return {
         ...state,
         token: "",
@@ -87,7 +82,6 @@ const authReducer = (state, action) => {
 
     //SUBJECT:check for cookies and store in state
     case GET_USER_COOKIES:
-      console.log("getting jwt")
       const token = cookies.get("jwt")
       const id = cookies.get("id")
 

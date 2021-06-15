@@ -20,10 +20,11 @@ app.get("/api", (req, res) => {
 app.use("/api/login", require("./routes/userLogin"))
 app.use("/api/user", require("./routes/userData"))
 app.use("/api/signup", require("./routes/userSignup"))
+app.use("/confirmaccount/", require("./routes/userConfirmAccount"))
 //app.use("/api/admin", require("./routes/admin"))
 
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
 
-Email()
+//Email({ destination: "acorbinelli@gmail.com", link: "https://google.com" })

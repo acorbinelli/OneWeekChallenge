@@ -6,6 +6,8 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const config = require("config")
 
+const Email = require("../utils/email")
+
 const userSignupChecks = require("../middleware/userSignupChecks")
 
 router.post("/", userSignupChecks, async (req, res) => {
@@ -45,6 +47,10 @@ router.post("/", userSignupChecks, async (req, res) => {
 
     jwt.sign(payload, JWTSecret, { expiresIn: 3600 }, (err, token) => {
       if (err) throw err
+      Email({
+        destination: user.email,
+        link: `http://localhost/api/signup/confirmaccount/${token}`,
+      })
       res.json({ token: token, id: user.id })
     })
   } catch (err) {
