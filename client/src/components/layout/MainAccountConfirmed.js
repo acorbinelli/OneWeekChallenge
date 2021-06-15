@@ -8,7 +8,7 @@ const MainAccountConfirmed = () => {
   const [confirmState, setConfirmState] = useState({ msg: "" })
 
   const { token } = useParams()
-  const { email, getUserCookies } = useContext(authContext)
+  const { Name, getUserCookies } = useContext(authContext)
   useEffect(() => {
     getUserCookies()
     sendToken(token)
@@ -27,8 +27,20 @@ const MainAccountConfirmed = () => {
   }
 
   return (
-    <div>
-      <h1>{confirmState.msg}</h1>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyItems: "center",
+        alignItems: "center",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%,-50%)",
+      }}
+    >
+      <h1>Success</h1>
+      <h2>{confirmState.msg}</h2>
       <Link to='/'>
         <Button classType='primary'>Go back to page</Button>
       </Link>

@@ -5,19 +5,18 @@ const jwt = require("jsonwebtoken")
 const config = require("config")
 
 const checkToken = async function (req, res, next) {
-  console.log(req.params)
-  console.log(req.params.token)
   const token = req.params.token
 
   //check if not token
   if (!token) {
-    return res.status(401).json({ msg: "a" })
+    return res.status(401).json({ msg: "Invalid Link" })
   }
 
   try {
     const decoded = jwt.verify(token, config.get("jwtSecret"))
 
     req.user = decoded.user
+
     next()
   } catch (err) {
     console.log(err.message)
@@ -26,7 +25,12 @@ const checkToken = async function (req, res, next) {
 }
 
 router.get("/:token", checkToken, async (req, res) => {
-  res.json({ msg: "Account is now confirmed" })
+  try {
+    await User.findByIdAndUpdate(req.user.id, { confirmed: true })
+  } catch (err) {
+    res.json({ msg: "DB error" })
+  }
+  res.json({ msg: "Email is now confirmed !" })
 })
 
 module.exports = router
