@@ -13,8 +13,8 @@ const UserSchema = mongoose.Schema({
   },
   phone: { type: Number, required: true },
   password: { type: String, required: true },
-  confirmed: false,
-  admin: false,
+  confirmed: { type: Boolean, default: false },
+  admin: { type: Boolean, default: false },
 })
 
 module.exports = mongoose.model("user", UserSchema)
