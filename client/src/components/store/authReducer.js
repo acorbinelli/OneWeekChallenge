@@ -4,27 +4,18 @@ import {
   USER_LOGIN,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  USER_SIGNUP,
+  USER_SIGNUP_FAIL,
   GET_USER_COOKIES,
   GET_USER_PROFILE_DATA,
   GET_USER_PROFILE_DATA_FAIL,
-  USER_SIGNUP,
   CLEAR_AUTH_ERRORS,
 } from "../types"
 
 const authReducer = (state, action) => {
   const cookies = new Cookies()
   switch (action.type) {
-    //check for token and id + store in context
-    case GET_USER_COOKIES:
-      console.log("getting jwt")
-      const token = cookies.get("jwt")
-      const id = cookies.get("id")
-
-      if (token) {
-        return { ...state, token: token, isAuthenticated: true, id: id }
-      }
-      return { ...state }
-    //store token and id
+    //SUBJECT:store token and id in cookies
     case USER_LOGIN:
       console.log("Logged in")
 
@@ -53,7 +44,59 @@ const authReducer = (state, action) => {
         isAuthenticated: false,
       }
 
-    //get current user object data
+    //SUBJECT:clean state/cookies and logout user
+    case USER_LOGOUT:
+      cookies.remove("jwt")
+      cookies.remove("id")
+      return {
+        ...state,
+        id: "",
+        isAuthenticated: false,
+        email: "",
+        name: "",
+        surname: "",
+        phone: "",
+        error: "",
+        token: "",
+      }
+
+    //SUBJECT:signup user and store jwt and id in state
+    case USER_SIGNUP:
+      console.log("Signup User")
+      cookies.set("jwt", action.payload.token, {
+        path: "/",
+        maxAge: 360,
+      })
+      cookies.set("id", action.payload.id, {
+        path: "/",
+        maxAge: 360,
+      })
+      return {
+        ...state,
+        isAuthenticated: true,
+        token: action.payload.token,
+      }
+    case USER_SIGNUP_FAIL:
+      console.log("Error signing up")
+      return {
+        ...state,
+        token: "",
+        error: action.payload,
+        isAuthenticated: false,
+      }
+
+    //SUBJECT:check for cookies and store in state
+    case GET_USER_COOKIES:
+      console.log("getting jwt")
+      const token = cookies.get("jwt")
+      const id = cookies.get("id")
+
+      if (token) {
+        return { ...state, token: token, isAuthenticated: true, id: id }
+      }
+      return { ...state }
+
+    //SUBJECT:get current user object data and store in state
     case GET_USER_PROFILE_DATA:
       return {
         ...state,
@@ -74,68 +117,12 @@ const authReducer = (state, action) => {
         error: action.payload,
       }
 
-    //clean state and delete cookies
-    case USER_LOGOUT:
-      cookies.remove("jwt")
-      cookies.remove("id")
-      return {
-        ...state,
-        id: "",
-        isAuthenticated: false,
-        email: "",
-        name: "",
-        surname: "",
-        phone: "",
-        error: "",
-        token: "",
-      }
-
     case CLEAR_AUTH_ERRORS:
       return {
         ...state,
         error: "",
       }
-    /* case USER_LOAD:
-      console.log("checking cookies")
-      const userToken = cookies.get("ONEWEEKCHALLENGEAPP_TOKEN")
-      const userID = cookies.get("ONEWEEKCHALLENGEAPP_ID")
-      const isAuthenticated = userToken ? true : false
 
-      return {
-        ...state,
-        isAuthenticated: isAuthenticated,
-        token: userToken,
-        id: userID,
-      }
-
-    case GET_USER:
-      console.log("getting user data")
-      cookies.set("ONEWEEKCHALLENGEAPP_userData", action.payload, {
-        path: "/",
-        maxAge: 360,
-      })
-      return { ...state, ...action.payload }
-    case LOGIN_SUCCESS:
-      console.log("logging in")
-      cookies.set("ONEWEEKCHALLENGEAPP_TOKEN", action.payload.token, {
-        path: "/",
-        maxAge: 360,
-      })
-      cookies.set("ONEWEEKCHALLENGEAPP_ID", action.payload.id, {
-        path: "/",
-        maxAge: 360,
-      })
-
-      loginUser(action.payload)
-
-      return {
-        ...state,
-        isAuthenticated: true,
-        token: action.payload.token,
-        id: action.payload.id,
-      }
-    case LOGIN_FAIL:
-      return { ...state, isAuthenticated: false } */
     default:
       return {}
   }

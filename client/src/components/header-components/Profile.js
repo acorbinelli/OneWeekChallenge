@@ -27,16 +27,58 @@ const Profile = ({ toggle }) => {
         <i className='far fa-calendar-alt'></i>
       </Logo>
       <form className={classes.profile}>
-        <Input type='text' value={name} disabled={false} />
-        <Input type='text' value={surname} disabled={false} />
-        <Input type='email' value={email} disabled={true} />
-        <Input type='phone' value={phone} disabled={false} />
-        <Input type='password' value='Old Password' disabled={false} />
-        <Input type='password' value='New Password' disabled={false} />
-        <Input type='password' value='Confirm Password' disabled={false} />
+        <Input
+          type='text'
+          state='name'
+          placeholder='Name'
+          value={name}
+          disabled={false}
+        />
+        <Input
+          type='text'
+          state='surname'
+          placeholder='Last Name'
+          value={surname}
+          disabled={false}
+        />
+        <Input
+          type='email'
+          state='email'
+          placeholder='Email'
+          value={email}
+          disabled={true}
+        />
+        <Input
+          type='phone'
+          state='phone'
+          placeholder='Phone'
+          value={phone}
+          disabled={false}
+        />
+        <Input
+          type='password'
+          state='password'
+          placeholder='Password'
+          value='Old Password'
+          disabled={false}
+        />
+        <Input
+          type='password'
+          state='newpassword'
+          placeholder='New Password'
+          value='New Password'
+          disabled={false}
+        />
+        <Input
+          type='password'
+          state='passwordconfirm'
+          placeholder='Confirm Password'
+          value='Confirm Password'
+          disabled={false}
+        />
       </form>
       <nav>
-        <Button onClick={toggle}>Edit</Button>
+        <Button onClick={toggle}>Save</Button>
         <Button onClick={toggle}>Cancel</Button>
         <Button onClick={setUserInfoHandler}>Log Out</Button>
       </nav>

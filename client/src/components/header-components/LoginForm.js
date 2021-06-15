@@ -51,6 +51,7 @@ const LoginForm = ({ toggle }) => {
       <form className={classes["login-form"]}>
         <Input
           type='email'
+          state='email'
           value={loginInfo.email}
           placeholder='Email'
           classType='primary'
@@ -59,6 +60,7 @@ const LoginForm = ({ toggle }) => {
         />
         <Input
           type='password'
+          state='password'
           placeholder='Password'
           value={loginInfo.password}
           classType='primary'

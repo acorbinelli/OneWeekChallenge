@@ -6,6 +6,8 @@ import {
   USER_LOGIN,
   USER_LOGIN_FAIL,
   USER_LOGOUT,
+  USER_SIGNUP,
+  USER_SIGNUP_FAIL,
   GET_USER_COOKIES,
   GET_USER_PROFILE_DATA,
   GET_USER_PROFILE_DATA_FAIL,
@@ -83,13 +85,13 @@ const AuthState = (props) => {
   //TODO:
   const userSignup = async (userInput) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/login", {
+      const res = await axios.post("http://localhost:5000/api/signup", {
         ...userInput,
       })
 
-      dispatch({ type: USER_LOGIN, payload: res.data })
+      dispatch({ type: USER_SIGNUP, payload: res.data })
     } catch (err) {
-      dispatch({ type: USER_LOGIN_FAIL, payload: err.response.data.msg })
+      dispatch({ type: USER_SIGNUP_FAIL, payload: err.response.data.msg })
     }
   }
 
@@ -116,6 +118,7 @@ const AuthState = (props) => {
         getUserProfileData,
         getUserCookies,
         userLogout,
+        userSignup,
         clearAuthErrors,
       }}
     >
