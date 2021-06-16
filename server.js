@@ -21,6 +21,8 @@ app.use("/api/login", require("./routes/userLogin"))
 app.use("/api/user", require("./routes/userData"))
 app.use("/api/signup", require("./routes/userSignup"))
 app.use("/confirmaccount/", require("./routes/userConfirmAccount"))
+app.use("/api/user/update", require("./routes/userUpdate"))
+
 //app.use("/api/admin", require("./routes/admin"))
 
 const PORT = process.env.PORT || 5000

@@ -6,8 +6,6 @@ import React, { Fragment } from "react"
 const primaryInputClass = classes.input
 const secondaryInputClass = classes["input-secondary"]
 const errorInputClass = classes["input-error"]
-const primarySpanClass = classes.span
-const errorSpanClass = classes["span-error"]
 
 const selectInputClass = (classInputType) => {
   switch (classInputType) {
@@ -21,16 +19,6 @@ const selectInputClass = (classInputType) => {
       return primaryInputClass
   }
 }
-const selectSpanClass = (classSpanType) => {
-  switch (classSpanType) {
-    case "primary":
-      return primarySpanClass
-    case "error":
-      return errorSpanClass
-    default:
-      return primarySpanClass
-  }
-}
 
 const Input = ({
   nameTag,
@@ -39,14 +27,13 @@ const Input = ({
   state,
   placeholder,
   classInputType,
-  classSpanType,
   disabled,
   handler,
   reference,
-  error,
+  onKeyDown,
 }) => {
   const updateHandler = (event) => {
-    handler({ [state]: event.target.value })
+    handler({ [state]: event.target.value.trim() })
   }
   /* const beautifyText = (text) => {
     if (text) {
@@ -61,10 +48,14 @@ const Input = ({
       return words
     }
   } */
-
+  const onKeyDownHandler = (event) => {
+    if (event.key === "Enter" && onKeyDown) {
+      onKeyDown()
+    }
+  }
   return (
     <Fragment>
-      <span className={"primary"}>{nameTag}</span>
+      <span className={classes.span}>{nameTag}</span>
       <input
         type={type}
         ref={reference}
@@ -73,6 +64,9 @@ const Input = ({
         onChange={updateHandler}
         disabled={disabled ? "disabled" : ""}
         className={selectInputClass(classInputType)}
+        onKeyDown={(e) => {
+          onKeyDownHandler(e)
+        }}
       />
     </Fragment>
   )

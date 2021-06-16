@@ -57,6 +57,7 @@ const LoginForm = ({ toggle }) => {
           classType='primary'
           disabled={false}
           handler={setLoginInfoHandler}
+          onKeyDown={userLoginHandler}
         />
         <Input
           type='password'
@@ -66,7 +67,7 @@ const LoginForm = ({ toggle }) => {
           classType='primary'
           disabled={false}
           handler={setLoginInfoHandler}
-          onEnter={userLoginHandler}
+          onKeyDown={userLoginHandler}
         />
       </form>
       <nav>

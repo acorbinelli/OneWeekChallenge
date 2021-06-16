@@ -138,6 +138,7 @@ const SignupForm = ({ toggle }) => {
           }
           handler={setSignupInfoHandler}
           value={signupInfo.name}
+          onKeyDown={setUserSignupHandler}
         />
         <Input
           nameTag='Last Name'
@@ -164,6 +165,7 @@ const SignupForm = ({ toggle }) => {
               : "primary"
           }
           value={signupInfo.surname}
+          onKeyDown={setUserSignupHandler}
         />
         <Input
           nameTag='Email'
@@ -190,6 +192,7 @@ const SignupForm = ({ toggle }) => {
               : "primary"
           }
           value={signupInfo.email}
+          onKeyDown={setUserSignupHandler}
         />
         <Input
           nameTag='Phone Number'
@@ -216,6 +219,7 @@ const SignupForm = ({ toggle }) => {
               : "primary"
           }
           value={signupInfo.phone}
+          onKeyDown={setUserSignupHandler}
         />
         <Input
           nameTag='Password'
@@ -242,6 +246,7 @@ const SignupForm = ({ toggle }) => {
               : "primary"
           }
           value={signupInfo.password}
+          onKeyDown={setUserSignupHandler}
         />
         <Input
           nameTag='Confirm Password'
@@ -268,6 +273,7 @@ const SignupForm = ({ toggle }) => {
               : "primary"
           }
           value={signupInfo.confirmpassword}
+          onKeyDown={setUserSignupHandler}
         />
       </form>
       <nav>

@@ -6,6 +6,8 @@ import {
   USER_LOGOUT,
   USER_SIGNUP,
   USER_SIGNUP_FAIL,
+  USER_UPDATE,
+  USER_UPDATE_FAIL,
   GET_USER_COOKIES,
   GET_USER_PROFILE_DATA,
   GET_USER_PROFILE_DATA_FAIL,
@@ -43,8 +45,8 @@ const authReducer = (state, action) => {
 
     //SUBJECT:clean state/cookies and logout user
     case USER_LOGOUT:
-      cookies.remove("jwt")
-      cookies.remove("id")
+      cookies.remove("jwt", { path: "/", domain: "localhost" })
+      cookies.remove("id", { path: "/", domain: "localhost" })
       return {
         ...state,
         id: "",
