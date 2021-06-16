@@ -112,6 +112,32 @@ const authReducer = (state, action) => {
         phone: action.payload.phone,
         error: action.payload,
       }
+    //SUBJECT: Update user profile data and token
+    case USER_UPDATE:
+      cookies.remove("jwt", { path: "/", domain: "localhost" })
+      cookies.remove("id", { path: "/", domain: "localhost" })
+      cookies.set("jwt", action.payload.newToken, {
+        path: "/",
+        maxAge: 360,
+      })
+      cookies.set("id", action.payload.id, {
+        path: "/",
+        maxAge: 360,
+      })
+      console.log(action.payload.email)
+      return {
+        ...state,
+        email: action.payload.email,
+        name: action.payload.name,
+        surname: action.payload.surname,
+        phone: action.payload.phone,
+        error: action.payload,
+      }
+    case USER_UPDATE_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      }
 
     case CLEAR_AUTH_ERRORS:
       return {

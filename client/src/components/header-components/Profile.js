@@ -1,6 +1,6 @@
 import classes from "./Profile.module.css"
 
-import React, { useContext } from "react"
+import React, { useContext, useState, useEffect } from "react"
 
 import Modal from "../UI/Modal"
 import Button from "../UI/Button"
@@ -10,15 +10,50 @@ import Logo from "./Logo"
 
 import authContext from "../store/authContext"
 
-//import { AuthContext } from "../store/authContext"
-
 const beautifyText = (text) => {
   const output = String(text).charAt(0).toUpperCase() + String(text).slice(1)
   return output
 }
 
 const Profile = ({ toggle }) => {
-  const { name, surname, email, phone, userLogout } = useContext(authContext)
+  const [profileState, setProfileState] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    oldpassword: "",
+    password: "",
+    confirmpassword: "",
+    id: "",
+    token: "",
+  })
+  const { id, name, surname, email, phone, token, userLogout, userUpdate } =
+    useContext(authContext)
+
+  useEffect(() => {
+    setProfileState({
+      ...profileState,
+      name: name,
+      surname: surname,
+      email: email,
+      phone: phone,
+      id: id,
+      token: token,
+    })
+  }, [])
+
+  const updateUserInfoHandler = () => {
+    userUpdate({ ...profileState })
+
+    toggle()
+  }
+
+  const updateHandler = (info) => {
+    setProfileState({
+      ...profileState,
+      ...info,
+    })
+  }
 
   const setUserInfoHandler = () => {
     userLogout()
@@ -36,15 +71,17 @@ const Profile = ({ toggle }) => {
           type='text'
           state='name'
           placeholder='Name'
-          value={beautifyText(name)}
+          value={profileState.name}
           disabled={false}
+          handler={updateHandler}
         />
         <Input
           type='text'
           state='surname'
           placeholder='Last Name'
-          value={beautifyText(surname)}
+          value={profileState.surname}
           disabled={false}
+          handler={updateHandler}
         />
         <Input
           type='email'
@@ -57,33 +94,37 @@ const Profile = ({ toggle }) => {
           type='phone'
           state='phone'
           placeholder='Phone'
-          value={phone}
+          value={profileState.phone}
           disabled={false}
+          handler={updateHandler}
+        />
+        <Input
+          type='password'
+          state='oldpassword'
+          placeholder='Password'
+          value={profileState.oldpassword}
+          disabled={false}
+          handler={updateHandler}
         />
         <Input
           type='password'
           state='password'
-          placeholder='Password'
-          value='Old Password'
-          disabled={false}
-        />
-        <Input
-          type='password'
-          state='newpassword'
           placeholder='New Password'
-          value='New Password'
+          value={profileState.password}
           disabled={false}
+          handler={updateHandler}
         />
         <Input
           type='password'
-          state='passwordconfirm'
+          state='confirmpassword'
           placeholder='Confirm Password'
-          value='Confirm Password'
+          value={profileState.confirmpassword}
           disabled={false}
+          handler={updateHandler}
         />
       </form>
       <nav>
-        <Button onClick={toggle}>Save</Button>
+        <Button onClick={updateUserInfoHandler}>Save</Button>
         <Button onClick={toggle}>Cancel</Button>
         <Button onClick={setUserInfoHandler}>Log Out</Button>
       </nav>

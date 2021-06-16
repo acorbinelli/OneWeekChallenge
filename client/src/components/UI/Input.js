@@ -33,7 +33,9 @@ const Input = ({
   onKeyDown,
 }) => {
   const updateHandler = (event) => {
-    handler({ [state]: event.target.value.trim() })
+    if (handler) {
+      handler({ [state]: event.target.value.trim() })
+    }
   }
   /* const beautifyText = (text) => {
     if (text) {

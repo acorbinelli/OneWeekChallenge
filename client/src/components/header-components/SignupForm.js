@@ -101,16 +101,7 @@ const SignupForm = ({ toggle }) => {
 
     return { msg: message, classType: errorClass }
   }
-  //BUG:refactor this
-  const setEmailInUseErrorClass = (error) => {
-    if (typeof error === "object") {
-      return userSignupErrorHandler("email").classType
-    } else if (typeof error === "string" && error === "Email already in use") {
-      return "error"
-    } else {
-      return "primary"
-    }
-  }
+
   return (
     <Modal toggle={toggle}>
       <Logo>

@@ -13,7 +13,7 @@ const userSignupChecks = require("../middleware/userSignupChecks")
 router.put("/", userSignupChecks, auth, async (req, res) => {
   console.log(`incoming user update request`)
   const JWTSecret = config.get("jwtSecret")
-  const { id, name, surname, phone, password, oldpassword, token } = req.body
+  const { id, name, surname, phone, password, oldpassword, email } = req.body
 
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -44,15 +44,16 @@ router.put("/", userSignupChecks, auth, async (req, res) => {
     jwt.sign(payload, JWTSecret, { expiresIn: 3600 }, (err, newToken) => {
       if (err) throw err
       res.json({
-        newToken: token,
+        newToken: newToken,
         id: id,
         name: name,
         surname: surname,
         phone: phone,
+        email: email,
       })
     })
   } catch (err) {
-    console.error(err.message)
+    console.error(err)
     res.status(500).json({ msg: "Server Error" })
   }
 })

@@ -84,7 +84,7 @@ const AuthState = (props) => {
   }
 
   //SUBJECT: User Signup
-  //TODO:
+
   const userSignup = async (userInput) => {
     try {
       const res = await axios.post("http://localhost:5000/api/signup", {
@@ -94,6 +94,31 @@ const AuthState = (props) => {
       dispatch({ type: USER_SIGNUP, payload: res.data })
     } catch (err) {
       dispatch({ type: USER_SIGNUP_FAIL, payload: err.response.data.msg })
+    }
+  }
+
+  //SUBJECT: User Update profile
+
+  const userUpdate = async (userInput) => {
+    try {
+      console.log(userInput)
+      const config = {
+        headers: {
+          "x-auth-token": userInput.token,
+        },
+      }
+      const res = await axios.put(
+        "http://localhost:5000/api/user/update",
+        {
+          ...userInput,
+        },
+        config
+      )
+
+      dispatch({ type: USER_UPDATE, payload: res.data })
+    } catch (err) {
+      console.log(err.response.data.msg)
+      dispatch({ type: USER_UPDATE_FAIL, payload: err.response.data.msg })
     }
   }
 
@@ -122,6 +147,7 @@ const AuthState = (props) => {
         userLogout,
         userSignup,
         clearAuthErrors,
+        userUpdate,
       }}
     >
       {props.children}
