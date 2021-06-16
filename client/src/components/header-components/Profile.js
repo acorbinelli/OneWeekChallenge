@@ -12,6 +12,11 @@ import authContext from "../store/authContext"
 
 //import { AuthContext } from "../store/authContext"
 
+const beautifyText = (text) => {
+  const output = String(text).charAt(0).toUpperCase() + String(text).slice(1)
+  return output
+}
+
 const Profile = ({ toggle }) => {
   const { name, surname, email, phone, userLogout } = useContext(authContext)
 
@@ -31,21 +36,21 @@ const Profile = ({ toggle }) => {
           type='text'
           state='name'
           placeholder='Name'
-          value={name}
+          value={beautifyText(name)}
           disabled={false}
         />
         <Input
           type='text'
           state='surname'
           placeholder='Last Name'
-          value={surname}
+          value={beautifyText(surname)}
           disabled={false}
         />
         <Input
           type='email'
           state='email'
           placeholder='Email'
-          value={email}
+          value={String(email).toLowerCase()}
           disabled={true}
         />
         <Input

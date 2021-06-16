@@ -4,6 +4,7 @@ import Modal from "../UI/Modal"
 import Button from "../UI/Button"
 import Input from "../UI/Input"
 import Logo from "./Logo"
+import autoClassHelper from "../../utils/autoClass-Helper"
 
 import authContext from "../store/authContext"
 
@@ -34,7 +35,7 @@ const SignupForm = ({ toggle }) => {
   }, [isAuthenticated])
 
   useEffect(() => {
-    if (error) {
+    if (error && typeof error === "object") {
       switch (error[0].param) {
         case "name":
           nameInput.current.focus()
@@ -58,6 +59,14 @@ const SignupForm = ({ toggle }) => {
           return
       }
     }
+    if (
+      error &&
+      typeof error === "string" &&
+      error === "Email already in use"
+    ) {
+      const field = emailInput.current
+      field.focus()
+    }
   }, [error])
 
   useEffect(() => {
@@ -77,15 +86,30 @@ const SignupForm = ({ toggle }) => {
   const userSignupErrorHandler = (inputParam) => {
     let message = ""
     let errorClass = ""
-    error.map((err) => {
-      if (err.param === inputParam) {
-        message = err.msg
-        errorClass = "error"
-      }
-      return ""
-    })
+
+    if (typeof error === "object") {
+      error.map((err) => {
+        if (err.param === inputParam) {
+          message = err.msg
+          errorClass = "error"
+        }
+        return ""
+      })
+    } else if (typeof error === "string") {
+      message = error
+    }
 
     return { msg: message, classType: errorClass }
+  }
+  //BUG:refactor this
+  const setEmailInUseErrorClass = (error) => {
+    if (typeof error === "object") {
+      return userSignupErrorHandler("email").classType
+    } else if (typeof error === "string" && error === "Email already in use") {
+      return "error"
+    } else {
+      return "primary"
+    }
   }
   return (
     <Modal toggle={toggle}>
@@ -95,98 +119,151 @@ const SignupForm = ({ toggle }) => {
       </Logo>
       <form className={classes["signup-form"]}>
         <Input
+          nameTag='Name'
           type='text'
           state='name'
           reference={nameInput}
-          placeholder={error ? userSignupErrorHandler("name").msg : "Name"}
+          placeholder={
+            typeof error === "object"
+              ? userSignupErrorHandler("name").msg
+              : "Name"
+          }
           classInputType={
-            error ? userSignupErrorHandler("name").classType : "primary"
+            autoClassHelper({
+              componentType: "input",
+              error: error,
+              defaultClass: "primary",
+              type: "name",
+            }).class
           }
           handler={setSignupInfoHandler}
-          classSpanType={
-            error ? userSignupErrorHandler("name").classType : "primary"
-          }
           value={signupInfo.name}
         />
         <Input
+          nameTag='Last Name'
           type='text'
           state='surname'
           reference={surnameInput}
           placeholder={
-            error ? userSignupErrorHandler("surname").msg : "Last Name"
+            typeof error === "object"
+              ? userSignupErrorHandler("surname").msg
+              : "Last Name"
           }
           classInputType={
-            error ? userSignupErrorHandler("surname").classType : "primary"
+            autoClassHelper({
+              componentType: "input",
+              error: error,
+              type: "surname",
+              defaultClass: "primary",
+            }).class
           }
           handler={setSignupInfoHandler}
           classSpanType={
-            error ? userSignupErrorHandler("surname").classType : "primary"
+            typeof error === "object"
+              ? userSignupErrorHandler("surname").classType
+              : "primary"
           }
           value={signupInfo.surname}
         />
         <Input
+          nameTag='Email'
           type='email'
           state='email'
           reference={emailInput}
-          placeholder={error ? userSignupErrorHandler("email").msg : "Email"}
+          placeholder={
+            typeof error === "object"
+              ? userSignupErrorHandler("email").msg
+              : "Email"
+          }
           classInputType={
-            error ? userSignupErrorHandler("email").classType : "primary"
+            autoClassHelper({
+              componentType: "input",
+              error: error,
+              type: "email",
+              defaultClass: "primary",
+            }).class
           }
           handler={setSignupInfoHandler}
           classSpanType={
-            error ? userSignupErrorHandler("email").classType : "primary"
+            typeof error === "object"
+              ? userSignupErrorHandler("email").classType
+              : "primary"
           }
           value={signupInfo.email}
         />
         <Input
+          nameTag='Phone Number'
           type='phone'
           state='phone'
           reference={phoneInput}
           placeholder={
-            error ? userSignupErrorHandler("phone").msg : "Phone Number"
+            typeof error === "object"
+              ? userSignupErrorHandler("phone").msg
+              : "Phone Number"
           }
           classInputType={
-            error ? userSignupErrorHandler("phone").classType : "primary"
+            autoClassHelper({
+              componentType: "input",
+              error: error,
+              type: "phone",
+              defaultClass: "primary",
+            }).class
           }
           handler={setSignupInfoHandler}
           classSpanType={
-            error ? userSignupErrorHandler("phone").classType : "primary"
+            typeof error === "object"
+              ? userSignupErrorHandler("phone").classType
+              : "primary"
           }
           value={signupInfo.phone}
         />
         <Input
+          nameTag='Password'
           type='password'
           state='password'
           reference={passwordInput}
           placeholder={
-            error ? userSignupErrorHandler("password").msg : "Password"
+            typeof error === "object"
+              ? userSignupErrorHandler("password").msg
+              : "Password"
           }
           classInputType={
-            error ? userSignupErrorHandler("password").classType : "primary"
+            autoClassHelper({
+              componentType: "input",
+              error: error,
+              type: "password",
+              defaultClass: "primary",
+            }).class
           }
           handler={setSignupInfoHandler}
           classSpanType={
-            error ? userSignupErrorHandler("password").classType : "primary"
+            typeof error === "object"
+              ? userSignupErrorHandler("password").classType
+              : "primary"
           }
           value={signupInfo.password}
         />
         <Input
+          nameTag='Confirm Password'
           type='password'
           state='confirmpassword'
           reference={confirmpasswordInput}
           placeholder={
-            error
+            typeof error === "object"
               ? userSignupErrorHandler("confirmpassword").msg
               : "Confirm Password"
           }
           classInputType={
-            error
-              ? userSignupErrorHandler("confirmpassword").classType
-              : "primary"
+            autoClassHelper({
+              componentType: "input",
+              error: error,
+              type: "confirmpassword",
+              defaultClass: "primary",
+            }).class
           }
           handler={setSignupInfoHandler}
           classSpanType={
-            error
+            typeof error === "object"
               ? userSignupErrorHandler("confirmpassword").classType
               : "primary"
           }

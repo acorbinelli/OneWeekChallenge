@@ -46,4 +46,6 @@
 .span-error {
   color: red;
   font-weight: 500;
+  justify-content: center;
+  align-items: center;
 }

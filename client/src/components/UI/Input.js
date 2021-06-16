@@ -33,6 +33,7 @@ const selectSpanClass = (classSpanType) => {
 }
 
 const Input = ({
+  nameTag,
   type,
   value,
   state,
@@ -47,7 +48,7 @@ const Input = ({
   const updateHandler = (event) => {
     handler({ [state]: event.target.value })
   }
-  const beautifyText = (text) => {
+  /* const beautifyText = (text) => {
     if (text) {
       let words = text.split(" ")
 
@@ -59,13 +60,11 @@ const Input = ({
 
       return words
     }
-  }
+  } */
 
   return (
     <Fragment>
-      <span className={selectSpanClass(classSpanType)}>
-        {beautifyText(placeholder)}
-      </span>
+      <span className={"primary"}>{nameTag}</span>
       <input
         type={type}
         ref={reference}
