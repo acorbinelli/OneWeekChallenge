@@ -8,21 +8,23 @@ const config = require("config")
 
 const auth = require("../middleware/auth")
 
-const userSignupChecks = require("../middleware/userSignupChecks")
+const userUpdateChecks = require("../middleware/userUpdateChecks")
 
-router.put("/", userSignupChecks, auth, async (req, res) => {
+router.put("/", userUpdateChecks, auth, async (req, res) => {
   console.log(`incoming user update request`)
   const JWTSecret = config.get("jwtSecret")
   const { id, name, surname, phone, password, oldpassword, email } = req.body
 
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
+    console.log(errors)
     return res.status(400).json({ msg: errors.array() })
   }
 
   try {
     let user = await User.findById(id)
     const isMatch = await bcrypt.compare(oldpassword, user.password)
+
     !isMatch && res.status(400).json({ msg: "Invalid password" })
 
     const salt = await bcrypt.genSalt(10)

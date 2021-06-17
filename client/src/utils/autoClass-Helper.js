@@ -1,7 +1,7 @@
 const autoClassHelper = (data) => {
   switch (data.componentType) {
     case "input":
-      if (data.error) {
+      if (data.error && Array.isArray(data.error)) {
         let cls = ""
         let msg = ""
         data.error.find((err) => {
@@ -10,6 +10,14 @@ const autoClassHelper = (data) => {
             msg = err.msg
           }
         })
+        return { class: cls, error: msg }
+      } else if (data.error && typeof data.error === "string") {
+        let cls = ""
+        let msg = ""
+        if (data.error === "Invalid password" && data.type === "oldpassword") {
+          cls = "error"
+          msg = data.error
+        }
         return { class: cls, error: msg }
       }
     /* else if (data.error && typeof data.error === "string") {

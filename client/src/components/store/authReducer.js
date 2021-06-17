@@ -73,6 +73,7 @@ const authReducer = (state, action) => {
         ...state,
         isAuthenticated: true,
         token: action.payload.token,
+        id: action.payload.id,
       }
     case USER_SIGNUP_FAIL:
       return {
@@ -124,14 +125,14 @@ const authReducer = (state, action) => {
         path: "/",
         maxAge: 360,
       })
-      console.log(action.payload.email)
+
       return {
         ...state,
         email: action.payload.email,
         name: action.payload.name,
         surname: action.payload.surname,
         phone: action.payload.phone,
-        error: action.payload,
+        error: action.payload.error,
       }
     case USER_UPDATE_FAIL:
       return {

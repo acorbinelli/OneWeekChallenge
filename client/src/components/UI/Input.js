@@ -37,19 +37,6 @@ const Input = ({
       handler({ [state]: event.target.value.trim() })
     }
   }
-  /* const beautifyText = (text) => {
-    if (text) {
-      let words = text.split(" ")
-
-      for (let i = 0; i < words.length; i++) {
-        words[i] = words[i][0].toUpperCase() + words[i].substr(1)
-      }
-
-      words = words.join(" ")
-
-      return words
-    }
-  } */
   const onKeyDownHandler = (event) => {
     if (event.key === "Enter" && onKeyDown) {
       onKeyDown()
@@ -57,19 +44,29 @@ const Input = ({
   }
   return (
     <Fragment>
-      <span className={classes.span}>{nameTag}</span>
-      <input
-        type={type}
-        ref={reference}
-        value={value}
-        placeholder={placeholder}
-        onChange={updateHandler}
-        disabled={disabled ? "disabled" : ""}
-        className={selectInputClass(classInputType)}
-        onKeyDown={(e) => {
-          onKeyDownHandler(e)
-        }}
-      />
+      <label className={classes.label} htmlFor={state}>
+        {nameTag}
+      </label>
+      <div className={classes.wrapper}>
+        <input
+          type={type}
+          id={state}
+          ref={reference}
+          value={value}
+          placeholder={placeholder}
+          onChange={updateHandler}
+          disabled={disabled ? "disabled" : ""}
+          className={selectInputClass(classInputType)}
+          onKeyDown={(e) => {
+            onKeyDownHandler(e)
+          }}
+        />
+        {classInputType === "error" && (
+          <div className={classes.test}>
+            <span className={classes["span-error"]}>!</span>
+          </div>
+        )}
+      </div>
     </Fragment>
   )
 }

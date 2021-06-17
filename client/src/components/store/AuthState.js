@@ -101,7 +101,6 @@ const AuthState = (props) => {
 
   const userUpdate = async (userInput) => {
     try {
-      console.log(userInput)
       const config = {
         headers: {
           "x-auth-token": userInput.token,
@@ -116,9 +115,10 @@ const AuthState = (props) => {
       )
 
       dispatch({ type: USER_UPDATE, payload: res.data })
+      return true
     } catch (err) {
-      console.log(err.response.data.msg)
       dispatch({ type: USER_UPDATE_FAIL, payload: err.response.data.msg })
+      return false
     }
   }
 
