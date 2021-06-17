@@ -11,10 +11,10 @@ import autoClassHelper from "../../utils/autoClass-Helper"
 
 import authContext from "../store/authContext"
 
-const beautifyText = (text) => {
+/* const beautifyText = (text) => {
   const output = String(text).charAt(0).toUpperCase() + String(text).slice(1)
   return output
-}
+} */
 
 const Profile = ({ toggle }) => {
   const [profileState, setProfileState] = useState({

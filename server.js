@@ -1,7 +1,6 @@
 const express = require("express")
 var cors = require("cors")
 const connectDB = require("./config/db")
-const Email = require("./utils/email")
 
 const app = express()
 
@@ -22,9 +21,11 @@ app.use("/api/user", require("./routes/userData"))
 app.use("/api/signup", require("./routes/userSignup"))
 app.use("/confirmaccount/", require("./routes/userConfirmEmail"))
 app.use("/api/user/update", require("./routes/userUpdate"))
+//month routes
 app.use("/api/month", require("./routes/monthData"))
-
-//app.use("/api/admin", require("./routes/admin"))
+app.use("/api/month", require("./routes/monthCreate"))
+app.use("/api/day", require("./routes/dayData"))
+app.use("/api/day", require("./routes/dayUpdate"))
 
 const PORT = process.env.PORT || 5000
 
