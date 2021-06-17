@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import Hero from "../main-components/Hero"
+import Calendar from "../main-components/Calendar"
 import authContext from "../store/authContext"
 
 const Main = () => {
@@ -13,11 +14,7 @@ const Main = () => {
             <h3>Let us know</h3>
           </div>
         )}
-        {isAuthenticated && (
-          <div>
-            <h1>CALENDAR</h1>
-          </div>
-        )}
+        {isAuthenticated && <Calendar />}
       </Hero>
     </main>
   )
