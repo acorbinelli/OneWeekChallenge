@@ -20,8 +20,9 @@ app.get("/api", (req, res) => {
 app.use("/api/login", require("./routes/userLogin"))
 app.use("/api/user", require("./routes/userData"))
 app.use("/api/signup", require("./routes/userSignup"))
-app.use("/confirmaccount/", require("./routes/userConfirmAccount"))
+app.use("/confirmaccount/", require("./routes/userConfirmEmail"))
 app.use("/api/user/update", require("./routes/userUpdate"))
+app.use("/api/month", require("./routes/monthData"))
 
 //app.use("/api/admin", require("./routes/admin"))
 
