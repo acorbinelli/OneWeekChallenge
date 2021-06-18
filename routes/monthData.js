@@ -4,15 +4,16 @@ const User = require("../models/userModel")
 const Month = require("../models/monthModel")
 const auth = require("../middleware/auth")
 
-router.get("/:month", auth, async (req, res) => {
+router.get("/:month&:year", auth, async (req, res) => {
   const monthname = req.params.month
-  console.log("incoming month req")
+  const year = req.params.year
+
   try {
     const isEmail = await User.findById(req.user.id).select("confirmed -_id")
     let month = {}
     if (isEmail.confirmed) {
       if (monthname) {
-        month = await Month.findOne({ monthname: monthname })
+        month = await Month.findOne({ monthname: monthname, year: year })
         res.json(month)
       } else {
         res.status(404).json({ msg: "Month not found" })

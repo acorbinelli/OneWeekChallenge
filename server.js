@@ -21,6 +21,7 @@ app.use("/api/user", require("./routes/userData"))
 app.use("/api/signup", require("./routes/userSignup"))
 app.use("/confirmaccount/", require("./routes/userConfirmEmail"))
 app.use("/api/user/update", require("./routes/userUpdate"))
+app.use("/api/user/confirmed", require("./routes/userConfirmed"))
 //month routes
 app.use("/api/month", require("./routes/monthData"))
 app.use("/api/month", require("./routes/monthCreate"))

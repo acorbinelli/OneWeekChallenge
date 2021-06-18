@@ -10,11 +10,10 @@ import Logo from "./Logo"
 import autoClassHelper from "../../utils/autoClass-Helper"
 
 import authContext from "../store/authContext"
-
-/* const beautifyText = (text) => {
+const beautifyText = (text) => {
   const output = String(text).charAt(0).toUpperCase() + String(text).slice(1)
   return output
-} */
+}
 
 const Profile = ({ toggle }) => {
   const [profileState, setProfileState] = useState({
@@ -107,7 +106,7 @@ const Profile = ({ toggle }) => {
               ? userUpdateErrorHandler("name").msg
               : "Name"
           }
-          value={profileState.name}
+          value={beautifyText(profileState.name)}
           disabled={false}
           handler={updateHandler}
           classInputType={
@@ -128,7 +127,7 @@ const Profile = ({ toggle }) => {
               ? userUpdateErrorHandler("surname").msg
               : "Last Name"
           }
-          value={profileState.surname}
+          value={beautifyText(profileState.surname)}
           disabled={false}
           handler={updateHandler}
           classInputType={

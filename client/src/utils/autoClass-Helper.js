@@ -2,15 +2,17 @@ const autoClassHelper = (data) => {
   switch (data.componentType) {
     case "input":
       if (data.error && Array.isArray(data.error)) {
-        let cls = ""
-        let msg = ""
-        data.error.find((err) => {
+        const errorObj = data.error.find((err) => {
           if (err.param === data.type) {
-            cls = "error"
-            msg = err.msg
+            return err.param
+          } else {
+            return {}
           }
         })
-        return { class: cls, error: msg }
+
+        if (errorObj.param === data.type) {
+          return { class: "error", error: errorObj.error }
+        }
       } else if (data.error && typeof data.error === "string") {
         let cls = ""
         let msg = ""
@@ -18,18 +20,12 @@ const autoClassHelper = (data) => {
           cls = "error"
           msg = data.error
         }
+
         return { class: cls, error: msg }
-      }
-    /* else if (data.error && typeof data.error === "string") {
-        return { error: data.error, class: "error" }
-      } else if (!data.error && data.class) {
-        return { error: "", class: data.class }
       } else {
-        console.log("AutoClassHelper: ERROR")
-        return { class: "primary" }
+        return { class: data.defaultClass }
       }
-      console.log("AutoClassHelper: ERROR")
-      return { class: "primary" } */
+
     default:
       return { class: data.defaultClass }
   }

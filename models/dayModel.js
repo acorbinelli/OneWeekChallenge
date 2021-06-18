@@ -1,17 +1,18 @@
 const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const DaySchema = mongoose.Schema({
   day: { type: Number, required: true },
-  month: { type: String, required: true },
+  month: { type: Schema.Types.ObjectId, ref: "Month" },
+  monthname: { type: String, required: true },
   year: { type: Number, required: true },
   date: {
     type: String,
-    unique: true,
+
     default: function () {
-      return `${this.day}/${this.month}/${this.year}`
+      return `${this.day}/${this.monthname}/${this.year}`
     },
   },
-
   slots: { type: Number, required: true },
   reserved: {
     type: Number,

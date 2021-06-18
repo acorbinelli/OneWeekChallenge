@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom"
 import Button from "../UI/Button"
 import axios from "axios"
 
-const MainAccountConfirmed = () => {
+const ConfirmEmail = () => {
   const [confirmState, setConfirmState] = useState({ msg: "" })
 
   const { token } = useParams()
@@ -48,4 +48,4 @@ const MainAccountConfirmed = () => {
   )
 }
 
-export default MainAccountConfirmed
+export default ConfirmEmail

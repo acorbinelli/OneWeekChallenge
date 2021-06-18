@@ -6,13 +6,16 @@ const auth = require("../middleware/auth")
 
 router.get("/:day", auth, async (req, res) => {
   const day = req.params.day
+  console.log(day)
+
   try {
     const account = await User.findById(req.user.id).select(
       "admin confirmed -_id"
     )
     const dayData = await Day.findById(day).select(
-      "-_id day month year slots reserved bookings"
+      "_id day month year slots reserved bookings monthname"
     )
+
     if (account.confirmed && !account.admin) {
       dayData.bookings = undefined
       res.json(dayData)

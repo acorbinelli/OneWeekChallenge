@@ -3,6 +3,8 @@ import {
   CHECK_EMAIL_CONFIRMED_FAIL,
   GET_MONTH,
   GET_MONTH_FAIL,
+  GET_DAY,
+  GET_DAY_FAIL,
   BOOK_DAY,
   BOOK_DAY_FAIL,
   BOOK_CANCEL,
@@ -12,13 +14,33 @@ import {
 const calReducer = (state, action) => {
   switch (action.type) {
     case CHECK_EMAIL_CONFIRMED:
-      return
+      return { ...state, emailconfirmed: action.payload }
     case CHECK_EMAIL_CONFIRMED_FAIL:
-      return
+      return { ...state, emailconfirmed: action.payload }
     case GET_MONTH:
-      return
+      return { ...state, month: action.payload }
     case GET_MONTH_FAIL:
-      return
+      return { ...state, month: action.payload }
+
+    case GET_DAY:
+      let newDaysData = []
+
+      if (state.month.days.length > 0) {
+        newDaysData = state.dayData.filter((day) => {
+          return day !== action.payload._id
+        })
+        newDaysData.push(action.payload)
+      } else {
+        newDaysData.push(action.payload)
+      }
+      console.log(newDaysData)
+      return {
+        ...state,
+        dayData: newDaysData,
+      }
+
+    case GET_DAY_FAIL:
+      return { ...state }
     case BOOK_DAY:
       return
     case BOOK_DAY_FAIL:

@@ -17,7 +17,6 @@ router.put("/", userUpdateChecks, auth, async (req, res) => {
 
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    console.log(errors)
     return res.status(400).json({ msg: errors.array() })
   }
 
@@ -30,7 +29,7 @@ router.put("/", userUpdateChecks, auth, async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const newPassword = await bcrypt.hash(password, salt)
 
-    let userUpdated = await User.findByIdAndUpdate(id, {
+    await User.findByIdAndUpdate(id, {
       name: name,
       surname: surname,
       phone: phone,
@@ -43,7 +42,7 @@ router.put("/", userUpdateChecks, auth, async (req, res) => {
       },
     }
 
-    jwt.sign(payload, JWTSecret, { expiresIn: 3600 }, (err, newToken) => {
+    jwt.sign(payload, JWTSecret, { expiresIn: 36000 }, (err, newToken) => {
       if (err) throw err
       res.json({
         newToken: newToken,

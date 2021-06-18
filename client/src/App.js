@@ -7,7 +7,7 @@ import CalState from "./components/store/CalState"
 
 import Header from "./components/layout/Header"
 import Main from "./components/layout/Main"
-import MainAccountConfirmed from "./components/layout/MainAccountConfirmed"
+import ConfirmEmail from "./components/layout/ConfirmEmail"
 
 function App() {
   return (
@@ -18,10 +18,7 @@ function App() {
           <CalState>
             <Route path='/' exact component={Main} />
           </CalState>
-          <Route
-            path='/confirmaccount/:token'
-            component={MainAccountConfirmed}
-          />
+          <Route path='/confirmaccount/:token' component={ConfirmEmail} />
         </Switch>
       </AuthState>
     </Router>

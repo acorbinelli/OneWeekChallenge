@@ -8,6 +8,11 @@ import autoClassHelper from "../../utils/autoClass-Helper"
 
 import authContext from "../store/authContext"
 
+const beautifyText = (text) => {
+  const output = String(text).charAt(0).toUpperCase() + String(text).slice(1)
+  return output
+}
+
 const SignupForm = ({ toggle }) => {
   const [signupInfo, setSignupInfo] = useState({
     name: "",
@@ -128,7 +133,7 @@ const SignupForm = ({ toggle }) => {
             }).class
           }
           handler={setSignupInfoHandler}
-          value={signupInfo.name}
+          value={beautifyText(signupInfo.name)}
           onKeyDown={setUserSignupHandler}
         />
         <Input
@@ -155,7 +160,7 @@ const SignupForm = ({ toggle }) => {
               ? userSignupErrorHandler("surname").classType
               : "primary"
           }
-          value={signupInfo.surname}
+          value={beautifyText(signupInfo.surname)}
           onKeyDown={setUserSignupHandler}
         />
         <Input

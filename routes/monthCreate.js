@@ -17,28 +17,39 @@ router.post("/", auth, async (req, res) => {
 
   try {
     const user = await User.findById(req.user.id).select("admin")
+
     const findMonth = await Month.findOne({ monthname: month, year: year })
+    const newMonthData = {
+      _id: new mongoose.Types.ObjectId(),
+      monthname: month,
+      year: year,
+      days: [],
+    }
+
     if (user.admin && !findMonth) {
-      const days = []
       for (i = 1; i < numberofdays + 1; i++) {
-        let newDay = new Day({
+        console.log(newMonthData._id)
+        const newDayData = {
           _id: new mongoose.Types.ObjectId(),
           day: i,
-          month: beautifyText(month),
+          month: newMonthData._id,
+          monthname: month,
           year: year,
           slots: 10,
+        }
+        newMonthData.days.push(newDayData._id)
+        const day = new Day(newDayData)
+        await day.save((err) => {
+          if (err) console.log(err)
         })
-        await newDay.save()
-        days.push(newDay._id)
       }
+      const newMonth = new Month(newMonthData)
 
-      const newMonth = new Month({
-        monthname: beautifyText(month),
-        days: days,
-        year: year,
+      await newMonth.save(async (err) => {
+        if (err) {
+          console.log(err)
+        }
       })
-
-      await newMonth.save()
 
       res.json({ month: `Month ${month} has been created` })
     } else {
