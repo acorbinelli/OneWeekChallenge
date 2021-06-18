@@ -6,7 +6,6 @@ const auth = require("../middleware/auth")
 
 router.get("/:day", auth, async (req, res) => {
   const day = req.params.day
-  console.log(day)
 
   try {
     const account = await User.findById(req.user.id).select(

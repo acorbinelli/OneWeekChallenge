@@ -33,7 +33,7 @@ const calReducer = (state, action) => {
       } else {
         newDaysData.push(action.payload)
       }
-      console.log(newDaysData)
+
       return {
         ...state,
         dayData: newDaysData,

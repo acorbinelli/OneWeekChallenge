@@ -22,8 +22,7 @@ const monthNames = [
 ]
 
 const Calendar = () => {
-  const { emailconfirmed, month, getMonthHandler, getDayHandler } =
-    useContext(calContext)
+  const { getMonthHandler, days } = useContext(calContext)
   const { token } = useContext(authContext)
   const [currentMonth, setCurrentMonth] = useState({ month: "January" })
   const [currentYear, setCurrentYear] = useState(2021)
@@ -52,6 +51,10 @@ const Calendar = () => {
     }
   }
 
+  const displayAllDays = () => {
+    return days.map((day) => <Day dayID={day} key={day}></Day>)
+  }
+
   return (
     <Fragment>
       <div className={classes.calendar}>
@@ -77,7 +80,7 @@ const Calendar = () => {
         >
           <span style={{ fontSize: "3rem" }}>{">"}</span>
         </Button>
-        {<Day dayID={"60cd03ea2df11c3dac2b19e3"}></Day>}
+        {displayAllDays()}
       </div>
     </Fragment>
   )

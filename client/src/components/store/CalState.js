@@ -73,7 +73,6 @@ const CalState = (props) => {
   }
 
   const getDayHandler = async (id, token) => {
-    console.log(id)
     const config = {
       headers: {
         "x-auth-token": token,
@@ -85,6 +84,7 @@ const CalState = (props) => {
       dispatch({ type: GET_DAY, payload: res.data })
     } catch (err) {
       console.log(err)
+      dispatch({ type: GET_DAY_FAIL, payload: err.response.data.msg })
     }
   }
   return (

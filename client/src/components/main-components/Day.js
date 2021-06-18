@@ -17,7 +17,7 @@ const Day = ({ dayID }) => {
 
   useEffect(() => {
     getDayHandler(dayID, token)
-  }, [token, dayID])
+  }, [])
 
   return <div style={{ backgroundColor: "red" }}></div>
 }
