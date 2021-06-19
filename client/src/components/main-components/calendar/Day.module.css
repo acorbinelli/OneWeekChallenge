@@ -1,0 +1,21 @@
+.day {
+  background-color: rgb(240, 240, 240);
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.day span {
+  font-size: 1.2rem;
+}
+
+.controls {
+}
+
+.data {
+  background-color: rgb(26, 27, 27);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}

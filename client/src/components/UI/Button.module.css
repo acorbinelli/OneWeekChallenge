@@ -5,14 +5,11 @@
   color: white;
   font-family: "Roboto", sans-serif;
   padding: 0.5rem 1rem;
-  margin: 0 1rem;
+  margin: 0.2rem 0.2rem;
+
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s all;
-}
-
-.button:not(:first-child) {
-  margin-left: 0;
 }
 
 .button:hover {
@@ -31,4 +28,42 @@
 
 .button-secondary:hover {
   color: rgb(66, 148, 255);
+}
+
+.button-third {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  margin: 0.2rem;
+  cursor: pointer;
+  transition: 0.3s all;
+  background-color: rgb(0, 59, 93);
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+}
+.button-third-disabled {
+  background: none;
+  user-select: none;
+  cursor: not-allowed;
+  border: none;
+  font-size: 1rem;
+  margin: 0.2rem;
+  cursor: pointer;
+  transition: 0.3s all;
+  background-color: rgb(147, 158, 163);
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+}
+.button-third-disabled:hover {
+  cursor: not-allowed;
+}
+.button-third span {
+  color: white;
+}
+
+.button-third:hover {
+  background-color: rgb(112, 173, 209);
+}
+.button-third:active {
+  background-color: rgb(0, 162, 255);
 }

@@ -1,0 +1,7 @@
+.year {
+  grid-area: year;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}

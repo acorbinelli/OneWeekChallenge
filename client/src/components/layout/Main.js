@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import Hero from "../main-components/Hero"
-import Calendar from "../main-components/Calendar"
+import Calendar from "../main-components/calendar/Calendar"
 
 import authContext from "../store/authContext"
 
 const Main = () => {
-  const { isAuthenticated, token } = useContext(authContext)
+  const { isAuthenticated } = useContext(authContext)
 
   return (
     <main>
@@ -16,6 +16,7 @@ const Main = () => {
             <h3>Let us know</h3>
           </div>
         )}
+        {isAuthenticated && <Calendar />}
       </Hero>
     </main>
   )

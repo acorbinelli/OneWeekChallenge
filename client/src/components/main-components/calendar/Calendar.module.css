@@ -1,0 +1,14 @@
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1fr 1fr 2fr 2fr 2fr 2fr 2fr;
+  grid-template-areas:
+    "year year year year year year year"
+    "month month month month month month month"
+    "day day day day day day day"
+    "day day day day day day day"
+    "day day day day day day day"
+    "day day day day day day day"
+    "day day day day day day day";
+  gap: 1rem;
+}

@@ -14,3 +14,12 @@ export const CHECK_EMAIL_CONFIRMED = "CHECK_EMAIL_CONFIRMED"
 export const CHECK_EMAIL_CONFIRMED_FAIL = "CHECK_EMAIL_CONFIRMED_FAIL"
 
 export const GET_MONTH = "GET_MONTH"
+export const GET_DAY = "GET_DAY"
+
+//months
+
+export const CHANGE_MONTH = "CHANGE_MONTH"
+export const CHANGE_YEAR = "CHANGE_YEAR"
+export const JANUARY = "January"
+export const FEBRUARY = "February"
+export const MARCH = "March"
