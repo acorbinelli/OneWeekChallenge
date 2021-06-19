@@ -3,7 +3,7 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import AuthState from "./components/store/AuthState"
-import CalState from "./components/store/CalState"
+import CalendarState from "./components/store/CalendarState"
 
 import Header from "./components/layout/Header"
 import Main from "./components/layout/Main"
@@ -15,9 +15,9 @@ function App() {
       <AuthState>
         <Header />
         <Switch>
-          <CalState>
+          <CalendarState>
             <Route path='/' exact component={Main} />
-          </CalState>
+          </CalendarState>
           <Route path='/confirmaccount/:token' component={ConfirmEmail} />
         </Switch>
       </AuthState>

@@ -37,6 +37,7 @@ const SignupForm = ({ toggle }) => {
       toggle()
       clearAuthErrors()
     }
+    //eslint-disable-next-line
   }, [isAuthenticated])
 
   useEffect(() => {
@@ -76,6 +77,7 @@ const SignupForm = ({ toggle }) => {
 
   useEffect(() => {
     clearAuthErrors()
+    //eslint-disable-next-line
   }, [signupInfo])
 
   const setSignupInfoHandler = (info) => {

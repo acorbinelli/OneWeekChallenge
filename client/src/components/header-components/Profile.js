@@ -50,9 +50,11 @@ const Profile = ({ toggle }) => {
       id: id,
       token: token,
     })
+    //eslint-disable-next-line
   }, [])
   useEffect(() => {
     clearAuthErrors()
+    //eslint-disable-next-line
   }, [profileState])
 
   const updateUserInfoHandler = async () => {

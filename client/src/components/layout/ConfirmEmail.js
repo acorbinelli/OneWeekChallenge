@@ -8,10 +8,11 @@ const ConfirmEmail = () => {
   const [confirmState, setConfirmState] = useState({ msg: "" })
 
   const { token } = useParams()
-  const { Name, getUserCookies } = useContext(authContext)
+  const { getUserCookies } = useContext(authContext)
   useEffect(() => {
     getUserCookies()
     sendToken(token)
+    //eslint-disable-next-line
   }, [])
 
   const sendToken = async (token) => {

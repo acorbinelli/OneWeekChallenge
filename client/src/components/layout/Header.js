@@ -24,6 +24,7 @@ const Header = () => {
 
   useEffect(() => {
     isAuthenticated && getUserProfileData()
+    //eslint-disable-next-line
   }, [isAuthenticated])
 
   const showLoginForm = () => {

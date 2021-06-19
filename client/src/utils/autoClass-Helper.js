@@ -25,7 +25,7 @@ const autoClassHelper = (data) => {
       } else {
         return { class: data.defaultClass }
       }
-
+      break
     default:
       return { class: data.defaultClass }
   }

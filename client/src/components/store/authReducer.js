@@ -21,11 +21,11 @@ const authReducer = (state, action) => {
     case USER_LOGIN:
       cookies.set("jwt", action.payload.token, {
         path: "/",
-        maxAge: 360,
+        maxAge: 36000,
       })
       cookies.set("id", action.payload.id, {
         path: "/",
-        maxAge: 360,
+        maxAge: 36000,
       })
 
       return {
@@ -63,11 +63,11 @@ const authReducer = (state, action) => {
     case USER_SIGNUP:
       cookies.set("jwt", action.payload.token, {
         path: "/",
-        maxAge: 360,
+        maxAge: 36000,
       })
       cookies.set("id", action.payload.id, {
         path: "/",
-        maxAge: 360,
+        maxAge: 36000,
       })
       return {
         ...state,
@@ -119,11 +119,11 @@ const authReducer = (state, action) => {
       cookies.remove("id", { path: "/", domain: "localhost" })
       cookies.set("jwt", action.payload.newToken, {
         path: "/",
-        maxAge: 360,
+        maxAge: 36000,
       })
       cookies.set("id", action.payload.id, {
         path: "/",
-        maxAge: 360,
+        maxAge: 36000,
       })
 
       return {

@@ -19,6 +19,7 @@ const LoginForm = ({ toggle }) => {
       toggle()
       clearAuthErrors()
     }
+    //eslint-disable-next-line
   }, [isAuthenticated])
 
   const setLoginInfoHandler = (info) => {
