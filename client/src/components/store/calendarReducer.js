@@ -33,6 +33,7 @@ const calendarReducer = (state, action) => {
       return {
         ...state,
         daysref: [],
+        month: [],
         name: action.payload.monthName,
         year: action.payload.yearNumber,
       }

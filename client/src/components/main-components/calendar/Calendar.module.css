@@ -1,14 +1,18 @@
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 1fr 1fr 2fr 2fr 2fr 2fr 2fr;
+  grid-template-rows: repeat(3, 1fr) repeat(6, 2fr);
   grid-template-areas:
     "year year year year year year year"
     "month month month month month month month"
-    "day day day day day day day"
-    "day day day day day day day"
-    "day day day day day day day"
-    "day day day day day day day"
-    "day day day day day day day";
+    "weekday weekday weekday weekday weekday weekday weekday";
   gap: 1rem;
+  height: 100%;
+}
+.weekdays {
+  grid-area: weekday;
+  height: 2rem;
+  background-color: violet;
+  display: flex;
+  justify-content: space-around;
 }

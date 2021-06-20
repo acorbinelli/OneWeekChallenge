@@ -14,12 +14,7 @@ const DaySchema = mongoose.Schema({
     },
   },
   slots: { type: Number, required: true },
-  reserved: {
-    type: Number,
-    default: function () {
-      return this.bookings.length
-    },
-  },
+  reserved: Number,
   bookings: [
     {
       type: String,

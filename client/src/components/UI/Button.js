@@ -6,6 +6,7 @@ const Button = (props) => {
   const secondaryClass = classes["button-secondary"]
   const thirdClass = classes["button-third"]
   const thirdClassDisabled = classes["button-third-disabled"]
+  const forthClassDisabled = classes["button-forth"]
   const selectClass = (classType) => {
     switch (classType) {
       case "primary":
@@ -14,8 +15,10 @@ const Button = (props) => {
         return secondaryClass
       case "third":
         return thirdClass
-      case "third-disabled":
+      case "disabled":
         return thirdClassDisabled
+      case "forth":
+        return forthClassDisabled
       default:
         return primaryClass
     }

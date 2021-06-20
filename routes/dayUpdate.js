@@ -12,66 +12,53 @@ router.put("/:day", auth, async (req, res) => {
     const account = await User.findById(req.user.id).select(
       "admin confirmed email -_id"
     )
-    const slots = await Day.findById(day).select("slots reserved bookings -_id")
-    if (!slots.reserved) {
-      slots.reserved = parseInt(slots.reserved) || 0
-    }
+    const slots = await Day.findById(day).select("slots bookings -_id")
 
-    if (account.confirmed && !account.admin) {
-      if (
-        add &&
-        !remove &&
-        slots.reserved < slots.slots &&
-        slots.bookings.indexOf(account.email) === -1
-      ) {
-        await Day.findByIdAndUpdate(day, {
-          $push: { bookings: account.email },
-        })
-        res.json("added booking")
-      } else if (!add && remove && slots.reserved > 0) {
-        await Day.findByIdAndUpdate(day, {
-          $pull: { bookings: account.email },
-        })
-        res.json("removed booking")
-      } else {
-        res.status(404).json({ msg: "Add or Remove booking !" })
-      }
-    } else if (account.confirmed && account.admin) {
+    if (account.confirmed && !booking) {
       if (
         add &&
         !remove &&
         !booking &&
-        slots.reserved < slots.slots &&
+        slots.bookings.length < slots.slots &&
         slots.bookings.indexOf(account.email) === -1
       ) {
         await Day.findByIdAndUpdate(day, {
           $push: { bookings: account.email },
         })
-
-        res.json({ msg: "Added your email to booking list" })
-      } else if (!add && remove && !booking && slots.reserved > 0) {
+        res.json({ msg: "add" })
+      } else if (
+        !add &&
+        remove &&
+        !booking &&
+        slots.bookings.length > 0 &&
+        slots.bookings.indexOf(account.email) >= 0
+      ) {
         await Day.findByIdAndUpdate(day, {
           $pull: { bookings: account.email },
         })
-        res.json({ msg: "Removed your email from  booking list" })
-      } else if (
+        res.json({ msg: "remove" })
+      } else {
+        res.status(404).json({ msg: "add/remove error 1" })
+      }
+    } else if (account.confirmed && account.admin && booking) {
+      if (
         add &&
         !remove &&
         booking &&
-        slots.reserved < slots.slots &&
-        slots.bookings.indexOf(account.email) === -1
+        slots.bookings.length < slots.slots &&
+        slots.bookings.indexOf(booking) === -1
       ) {
         await Day.findByIdAndUpdate(day, {
           $push: { bookings: booking },
         })
-        res.json({ msg: "Added your specified email to booking list" })
-      } else if (!add && remove && booking && slots.reserved > 0) {
+        res.json({ msg: "add other" })
+      } else if (!add && remove && booking && slots.bookings.length > 0) {
         await Day.findByIdAndUpdate(day, {
           $pull: { bookings: booking },
         })
-        res.json({ msg: "Removed your specified email from booking list" })
+        res.json({ msg: "remove other" })
       } else {
-        res.status(404).json({ msg: "Incorrect operation" })
+        res.status(404).json({ msg: "add/remove error" })
       }
     } else {
       res.status(401).json({ msg: "Unauthorized" })

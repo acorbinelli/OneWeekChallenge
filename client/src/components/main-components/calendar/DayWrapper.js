@@ -5,30 +5,21 @@ import CalendarContext from "../../store/calendarContext"
 import Day from "./Day"
 
 const DayWrapper = () => {
-  const { token } = useContext(AuthContext)
-  const { days, getDayHandler, getDayHandlerCleanup } =
-    useContext(CalendarContext)
-  const [localDays, setLocalDays] = useState()
+  const { token, email } = useContext(AuthContext)
+  const { days } = useContext(CalendarContext)
+  const [jsxDays, setJsxDays] = useState()
 
   useEffect(() => {
-    setLocalDays(days)
+    if (days && token) {
+      const jsxData = days.map((d) => (
+        <Day dayID={d} key={d} token={token} email={email}></Day>
+      ))
 
-    return () => {
-      setLocalDays()
+      setJsxDays(jsxData)
     }
   }, [days])
-  const populateCalendar = () => {
-    return localDays.map((d) => (
-      <Day
-        dayID={d}
-        key={d}
-        handler={getDayHandler}
-        cleanup={getDayHandlerCleanup}
-        token={token}
-      />
-    ))
-  }
-  return <Fragment>{localDays && populateCalendar()}</Fragment>
+
+  return <Fragment>{jsxDays}</Fragment>
 }
 
 export default DayWrapper

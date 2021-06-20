@@ -4,7 +4,7 @@ import axios from "axios"
 import CalendarContext from "./calendarContext"
 import CalendarReducer from "./calendarReducer"
 
-import { GET_DAY, GET_MONTH, CHANGE_MONTH } from "../types"
+import { GET_MONTH, CHANGE_MONTH } from "../types"
 
 const CalendarState = (props) => {
   const initialState = {
@@ -17,7 +17,6 @@ const CalendarState = (props) => {
   const [state, dispatch] = useReducer(CalendarReducer, initialState)
 
   const cancelMonthToken = axios.CancelToken.source()
-  const cancelDayToken = axios.CancelToken.source()
 
   const getMonthHandler = async (monthName, yearNumber, token) => {
     const config = {
@@ -55,31 +54,6 @@ const CalendarState = (props) => {
     })
   }
 
-  const getDayHandler = async (dayID, token) => {
-    //  console.log(`getting day for ${dayID} token ${token}`)
-    const config = {
-      headers: {
-        "x-auth-token": token,
-      },
-      cancelToken: cancelDayToken.token,
-    }
-    try {
-      const res = await axios.get(
-        `http://localhost:5000/api/day/${dayID}`,
-        config
-      )
-
-      if (res.data) {
-        dispatch({ type: GET_DAY, payload: res.data })
-      }
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
-  const getDayHandlerCleanup = () => {
-    cancelDayToken.cancel("Cancel Day Request")
-  }
-
   return (
     <CalendarContext.Provider
       value={{
@@ -91,8 +65,6 @@ const CalendarState = (props) => {
         getMonthHandler,
         getMonthHandlerCleanup,
         changeMonthHandler,
-        getDayHandler,
-        getDayHandlerCleanup,
       }}
     >
       {props.children}

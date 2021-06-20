@@ -45,7 +45,7 @@ router.post("/", userSignupChecks, async (req, res) => {
       },
     }
 
-    jwt.sign(payload, JWTSecret, { expiresIn: 3600 }, (err, token) => {
+    jwt.sign(payload, JWTSecret, { expiresIn: 36000 }, (err, token) => {
       if (err) throw err
       Email({
         destination: user.email,

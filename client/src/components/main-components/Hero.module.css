@@ -18,12 +18,6 @@
 
 .primary {
   height: 80vh;
-  width: 100vw;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
 }
 
 .secondary h1 {
