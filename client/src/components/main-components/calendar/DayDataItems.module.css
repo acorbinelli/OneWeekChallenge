@@ -1,0 +1,16 @@
+.data {
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  font-weight: 900;
+  display: flex;
+  flex-direction: row;
+
+  color: rgb(0, 0, 0);
+
+  z-index: 100;
+}
+.stats {
+  padding: 0.2rem;
+  display: flex;
+  flex-direction: column;
+}

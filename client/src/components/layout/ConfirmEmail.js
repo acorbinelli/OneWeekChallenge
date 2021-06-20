@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import authContext from "../store/authContext"
+import AuthContext from "../store/authContext"
 import { Link, useParams } from "react-router-dom"
 import Button from "../UI/Button"
 import axios from "axios"
@@ -8,7 +8,7 @@ const ConfirmEmail = () => {
   const [confirmState, setConfirmState] = useState({ msg: "" })
 
   const { token } = useParams()
-  const { getUserCookies } = useContext(authContext)
+  const { getUserCookies } = useContext(AuthContext)
   useEffect(() => {
     getUserCookies()
     sendToken(token)
