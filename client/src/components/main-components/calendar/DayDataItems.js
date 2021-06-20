@@ -7,6 +7,7 @@ const DayDataItems = ({ localDayData }) => {
     if (Object.keys(localDayData).length > 0) {
       calculateGradient();
     }
+    //eslint-disable-next-line
   }, [localDayData]);
   const calculateGradient = () => {
     const booked = localDayData.que.split("/")[0];

@@ -4,7 +4,7 @@ import AuthContext from "../../store/authContext";
 import classes from "./Calendar.module.css";
 
 import Month from "./Month";
-import Year from "./Year";
+//import Year from "./Year";
 import Weekdays from "./Weekdays";
 import DayWrapper from "./DayWrapper";
 
@@ -48,16 +48,16 @@ const Calendar = () => {
   const { token } = useContext(AuthContext);
 
   const [currentMonth, setCurrentMonth] = useState(JANUARY);
-  const [currentYear, setCurrentYear] = useState(2021);
+  // const [currentYear, setCurrentYear] = useState(2021);
 
   useEffect(() => {
-    changeMonthHandler(currentMonth, currentYear);
+    changeMonthHandler(currentMonth, 2021);
 
     return () => {
       changeMonthHandler();
     };
     //eslint-disable-next-line
-  }, [currentMonth, currentYear]);
+  }, [currentMonth]);
 
   useEffect(() => {
     if (name && year && token) {
@@ -84,17 +84,16 @@ const Calendar = () => {
       }
     }
   };
-  const buttonChangeYear = (action) => {
+  /*  const buttonChangeYear = (action) => {
     if (action === "<") {
       setCurrentYear(currentYear - 1);
     } else if (action === ">") {
       setCurrentYear(currentYear + 1);
     }
-  };
-
+  }; */
+  // <Year handler={buttonChangeYear} yearNumber={currentYear} />
   return (
     <div className={classes.calendar}>
-      <Year handler={buttonChangeYear} yearNumber={currentYear} />
       <Month handler={buttonChangeMonth} monthName={currentMonth} />
       <Weekdays />
       <DayWrapper />

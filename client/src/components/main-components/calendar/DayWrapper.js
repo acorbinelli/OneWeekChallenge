@@ -1,25 +1,26 @@
-import React, { useContext, Fragment, useEffect, useState } from "react"
-import AuthContext from "../../store/authContext"
-import CalendarContext from "../../store/calendarContext"
+import React, { useContext, Fragment, useEffect, useState } from "react";
+import AuthContext from "../../store/authContext";
+import CalendarContext from "../../store/calendarContext";
 
-import Day from "./Day"
+import Day from "./Day";
 
 const DayWrapper = () => {
-  const { token, email } = useContext(AuthContext)
-  const { days } = useContext(CalendarContext)
-  const [jsxDays, setJsxDays] = useState()
+  const { token, email } = useContext(AuthContext);
+  const { days } = useContext(CalendarContext);
+  const [jsxDays, setJsxDays] = useState();
 
   useEffect(() => {
     if (days && token) {
       const jsxData = days.map((d) => (
         <Day dayID={d} key={d} token={token} email={email}></Day>
-      ))
+      ));
 
-      setJsxDays(jsxData)
+      setJsxDays(jsxData);
     }
-  }, [days])
+    //eslint-disable-next-line
+  }, [days]);
 
-  return <Fragment>{jsxDays}</Fragment>
-}
+  return <Fragment>{jsxDays}</Fragment>;
+};
 
-export default DayWrapper
+export default DayWrapper;

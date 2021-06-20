@@ -5,19 +5,21 @@ const Weekdays = () => {
   return (
     <Fragment>
       <span
-        className={classes.weekdays}
         style={{
-          gridRow: "3/4",
+          gridRow: "2/3",
           textAlign: "center",
+          color: "white",
         }}
+        className={classes.weekdays}
       >
         Monday
       </span>
       <span
         className={classes.weekdays}
         style={{
-          gridRow: "3/4",
+          gridRow: "2/3",
           textAlign: "center",
+          color: "white",
         }}
       >
         Tuesday
@@ -25,8 +27,9 @@ const Weekdays = () => {
       <span
         className={classes.weekdays}
         style={{
-          gridRow: "3/4",
+          gridRow: "2/3",
           textAlign: "center",
+          color: "white",
         }}
       >
         Wednesday
@@ -34,8 +37,9 @@ const Weekdays = () => {
       <span
         className={classes.weekdays}
         style={{
-          gridRow: "3/4",
+          gridRow: "2/3",
           textAlign: "center",
+          color: "white",
         }}
       >
         Thursday
@@ -43,8 +47,9 @@ const Weekdays = () => {
       <span
         className={classes.weekdays}
         style={{
-          gridRow: "3/4",
+          gridRow: "2/3",
           textAlign: "center",
+          color: "white",
         }}
       >
         Friday
@@ -52,8 +57,9 @@ const Weekdays = () => {
       <span
         className={classes.weekdays}
         style={{
-          gridRow: "3/4",
+          gridRow: "2/3",
           textAlign: "center",
+          color: "rgb(182, 255, 47)",
         }}
       >
         Saturday
@@ -61,8 +67,9 @@ const Weekdays = () => {
       <span
         className={classes.weekdays}
         style={{
-          gridRow: "3/4",
+          gridRow: "2/3",
           textAlign: "center",
+          color: "rgb(182, 255, 47)",
         }}
       >
         Sunday

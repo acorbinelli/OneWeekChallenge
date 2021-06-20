@@ -18,6 +18,21 @@
 
 .primary {
   height: 80vh;
+  width: 100vw;
+  background-position-y: 30%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+      to bottom right,
+      rgba(4, 29, 41, 0.363),
+      rgba(0, 0, 0, 0.925)
+    ),
+    url("../../img/hero-1.jpg");
+  overflow-y: auto;
 }
 
 .secondary h1 {

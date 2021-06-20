@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 
 import DayControls from "./DayControls";
 import DayDataItems from "./DayDataItems";
@@ -17,6 +17,7 @@ const Day = ({ token, dayID }) => {
     return () => {
       cancelDayToken.cancel();
     };
+    //eslint-disable-next-line
   }, []);
   const cancelDayToken = axios.CancelToken.source();
 
@@ -45,11 +46,12 @@ const Day = ({ token, dayID }) => {
     }
   };
 
-  const getDayName = (dayDate) => {
-    let dayName = new Date(dayDate);
-    dayName = dayName.getDay();
+  const getDayName = () => {
+    const objDate = new Date(
+      `${localDayData.day} ${localDayData.monthname} ${localDayData.year}`
+    );
 
-    return dayName;
+    return objDate.getDay() || 0;
   };
 
   const setShowBookingsHandler = () => {
@@ -64,26 +66,26 @@ const Day = ({ token, dayID }) => {
     <div
       className={classes.day}
       style={{
-        gridColumn: `${
-          getDayName(
-            localDayData.day + localDayData.monthname + localDayData.year
-          ) + 1
-        }`,
+        gridColumn: getDayName(),
       }}
     >
-      <DayDataItems localDayData={localDayData} />
-      <DayControls
-        localDayData={localDayData}
-        getDayData={getDayData}
-        cancelDayToken={cancelDayToken}
-        token={token}
-        setShowBookingsHandler={setShowBookingsHandler}
-      />
-      <Bookings
-        localDayData={localDayData}
-        setShowBookingsHandler={setShowBookingsHandler}
-        showBookings={showBookings}
-      />
+      {localDayData && (
+        <Fragment>
+          <DayDataItems localDayData={localDayData} />
+          <DayControls
+            localDayData={localDayData}
+            getDayData={getDayData}
+            cancelDayToken={cancelDayToken}
+            token={token}
+            setShowBookingsHandler={setShowBookingsHandler}
+          />
+          <Bookings
+            localDayData={localDayData}
+            setShowBookingsHandler={setShowBookingsHandler}
+            showBookings={showBookings}
+          />
+        </Fragment>
+      )}
     </div>
   );
 };

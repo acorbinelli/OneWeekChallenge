@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import AuthContext from "../../store/authContext";
+import React, { useState, useEffect } from "react";
+
 import classes from "./DayControls.module.css";
 import axios from "axios";
 import Button from "../../UI/Button";
-import authContext from "../../store/authContext";
 
 const DayControls = ({
   localDayData,
@@ -12,7 +11,6 @@ const DayControls = ({
   cancelDayToken,
   setShowBookingsHandler,
 }) => {
-  const { email } = useContext(authContext);
   const [responseData, setResponseData] = useState({
     add: false,
     remove: false,
@@ -24,6 +22,7 @@ const DayControls = ({
       setResponseDataHandler();
       getButtonClass();
     }
+    //eslint-disable-next-line
   }, [localDayData]);
 
   const setResponseDataHandler = () => {

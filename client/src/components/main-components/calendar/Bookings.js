@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import Modal from "../../UI/Modal";
 import classes from "./Bookings.module.css";
 import { v4 as uuidv4 } from "uuid";
