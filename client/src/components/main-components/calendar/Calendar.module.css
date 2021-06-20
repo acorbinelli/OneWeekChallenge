@@ -6,12 +6,13 @@
     "year year year year year year year"
     "month month month month month month month"
     "weekday weekday weekday weekday weekday weekday weekday";
-  gap: 1rem;
+  gap: 0.5rem;
   height: 100%;
+  width: 60vw;
 }
 .weekdays {
   grid-area: weekday;
-  height: 2rem;
+  height: 1rem;
   background-color: violet;
   display: flex;
   justify-content: space-around;

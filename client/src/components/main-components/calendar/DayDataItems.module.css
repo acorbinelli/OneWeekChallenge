@@ -1,16 +1,27 @@
 .data {
-  background-color: rgb(255, 255, 255);
   height: 100%;
   font-weight: 900;
-  display: flex;
-  flex-direction: row;
 
-  color: rgb(0, 0, 0);
-
+  transition: 2s all;
   z-index: 100;
+  position: relative;
+  padding: 0;
 }
 .stats {
   padding: 0.2rem;
   display: flex;
   flex-direction: column;
+}
+
+.que {
+  color: rgb(255, 255, 255);
+  font-weight: 900;
+  font-size: 0.8rem !important;
+
+  background-color: rgba(0, 0, 0, 0.411);
+  text-align: right;
+  padding: 0;
+}
+.que i {
+  margin-right: 0.5rem;
 }

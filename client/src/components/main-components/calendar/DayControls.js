@@ -22,6 +22,7 @@ const DayControls = ({
   useEffect(() => {
     if (Object.keys(localDayData).length > 0) {
       setResponseDataHandler();
+      getButtonClass();
     }
   }, [localDayData]);
 
@@ -67,20 +68,65 @@ const DayControls = ({
     getDayData();
   };
 
+  const getButtonClass = () => {
+    //FIX:
+    if (localDayData) {
+      const objDate = new Date(
+        `${localDayData.day} ${localDayData.monthname} ${localDayData.year}`
+      );
+      const newDate = new Date();
+
+      if (objDate < newDate) {
+        return "forth-disabled";
+      }
+      if (responseData.add && !responseData.isfull) {
+        return "forth-add";
+      } else if (localDayData.present) {
+        return "forth-remove";
+      } else if (responseData.isfull && !localDayData.present) {
+        return "forth-disabled";
+      }
+    }
+  };
+
+  const checkOld = () => {
+    const objDate = new Date(
+      `${localDayData.day} ${localDayData.monthname} ${localDayData.year}`
+    );
+    const newDate = new Date();
+
+    if (objDate < newDate) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className={classes.controls}>
-      <Button
-        onClick={() => {
-          sendDayData(responseData);
-        }}
-        classType={"third"}
-      >
-        <span>
-          <i className="fas fa-user-check" />
-        </span>
-      </Button>
+      {!checkOld() && (
+        <Button
+          onClick={() => {
+            sendDayData(responseData);
+          }}
+          classType={getButtonClass()}
+          disabled={checkOld ? "disabled" : ""}
+        >
+          {localDayData.present && (
+            <span>
+              <i className="fas fa-user-times"></i>
+            </span>
+          )}
+          {!localDayData.present && (
+            <span>
+              <i className="fas fa-user-check" />
+            </span>
+          )}
+        </Button>
+      )}
+
       {localDayData.admin && (
-        <Button onClick={setShowBookingsHandler} classType="forth">
+        <Button onClick={setShowBookingsHandler} classType={"secondary"}>
           <span>
             <i className="fas fa-cog" />
           </span>

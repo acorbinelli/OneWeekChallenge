@@ -8,8 +8,34 @@ import Year from "./Year";
 import Weekdays from "./Weekdays";
 import DayWrapper from "./DayWrapper";
 
-import { JANUARY, FEBRUARY, MARCH } from "../../types";
-const monthsArray = [JANUARY, FEBRUARY, MARCH];
+import {
+  JANUARY,
+  FEBRUARY,
+  MARCH,
+  APRIL,
+  MAY,
+  JUNE,
+  JULY,
+  AUGUST,
+  SEPTEMBER,
+  OCTOBER,
+  NOVEMBER,
+  DECEMBER,
+} from "../../types";
+const monthsArray = [
+  JANUARY,
+  FEBRUARY,
+  MARCH,
+  APRIL,
+  MAY,
+  JUNE,
+  JULY,
+  AUGUST,
+  SEPTEMBER,
+  OCTOBER,
+  NOVEMBER,
+  DECEMBER,
+];
 
 const Calendar = () => {
   const {

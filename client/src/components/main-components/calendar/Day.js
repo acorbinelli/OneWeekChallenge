@@ -53,7 +53,6 @@ const Day = ({ token, dayID }) => {
   };
 
   const setShowBookingsHandler = () => {
-    console.log("showing");
     if (!showBookings) {
       setShowBookings(true);
     } else {

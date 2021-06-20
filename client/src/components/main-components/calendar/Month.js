@@ -1,31 +1,31 @@
-import React from "react"
+import React from "react";
 
-import Button from "../../UI/Button"
-import classes from "./Month.module.css"
+import Button from "../../UI/Button";
+import classes from "./Month.module.css";
 
 const Month = (props) => {
   return (
     <div className={classes.month}>
       <Button
-        classType='secondary'
+        classType="secondary"
         onClick={() => {
-          props.handler("<")
+          props.handler("<");
         }}
         style={{ gridArea: "button" }}
       >
         <span>{"<"}</span>
       </Button>
-      <h1>{props.monthName}</h1>
+      <h1 className={classes.monthscroll}>{props.monthName}</h1>
       <Button
-        classType='secondary'
+        classType="secondary"
         onClick={() => {
-          props.handler(">")
+          props.handler(">");
         }}
       >
         <span>{">"}</span>
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default Month
+export default Month;

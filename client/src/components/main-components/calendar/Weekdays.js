@@ -1,74 +1,68 @@
 import React, { Fragment } from "react";
+import classes from "./Weekdays.css";
 
 const Weekdays = () => {
   return (
     <Fragment>
       <span
+        className={classes.weekdays}
         style={{
           gridRow: "3/4",
           textAlign: "center",
-          fontWeight: "600",
-          fontSize: "1.5rem",
         }}
       >
         Monday
       </span>
       <span
+        className={classes.weekdays}
         style={{
           gridRow: "3/4",
           textAlign: "center",
-          fontWeight: "600",
-          fontSize: "1.5rem",
         }}
       >
         Tuesday
       </span>
       <span
+        className={classes.weekdays}
         style={{
           gridRow: "3/4",
           textAlign: "center",
-          fontWeight: "600",
-          fontSize: "1.5rem",
         }}
       >
         Wednesday
       </span>
       <span
+        className={classes.weekdays}
         style={{
           gridRow: "3/4",
           textAlign: "center",
-          fontWeight: "600",
-          fontSize: "1.5rem",
         }}
       >
         Thursday
       </span>
       <span
+        className={classes.weekdays}
         style={{
           gridRow: "3/4",
           textAlign: "center",
-          fontWeight: "600",
-          fontSize: "1.5rem",
         }}
       >
         Friday
       </span>
       <span
+        className={classes.weekdays}
         style={{
           gridRow: "3/4",
           textAlign: "center",
-          fontWeight: "600",
-          fontSize: "1.5rem",
         }}
       >
         Saturday
       </span>
       <span
+        className={classes.weekdays}
         style={{
           gridRow: "3/4",
           textAlign: "center",
-          fontWeight: "600",
-          fontSize: "1.5rem",
         }}
       >
         Sunday
