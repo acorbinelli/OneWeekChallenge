@@ -53,7 +53,7 @@ const DayControls = ({
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/day/${localDayData._id}`,
+        `https://oneweekchallengeapp.herokuapp.com/api/day/${localDayData._id}`,
         responseData,
         config
       );

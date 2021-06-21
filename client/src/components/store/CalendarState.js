@@ -1,10 +1,10 @@
-import React, { useReducer } from "react"
-import axios from "axios"
+import React, { useReducer } from "react";
+import axios from "axios";
 
-import CalendarContext from "./calendarContext"
-import CalendarReducer from "./calendarReducer"
+import CalendarContext from "./calendarContext";
+import CalendarReducer from "./calendarReducer";
 
-import { GET_MONTH, CHANGE_MONTH } from "../types"
+import { GET_MONTH, CHANGE_MONTH } from "../types";
 
 const CalendarState = (props) => {
   const initialState = {
@@ -12,11 +12,11 @@ const CalendarState = (props) => {
     year: 2021,
     daysref: [],
     month: [],
-  }
+  };
 
-  const [state, dispatch] = useReducer(CalendarReducer, initialState)
+  const [state, dispatch] = useReducer(CalendarReducer, initialState);
 
-  const cancelMonthToken = axios.CancelToken.source()
+  const cancelMonthToken = axios.CancelToken.source();
 
   const getMonthHandler = async (monthName, yearNumber, token) => {
     const config = {
@@ -24,26 +24,26 @@ const CalendarState = (props) => {
         "x-auth-token": token,
       },
       cancelToken: cancelMonthToken.token,
-    }
+    };
     try {
       // console.log(`requesting for ${monthName}/${yearNumber}`)
       const res = await axios.get(
-        `http://localhost:5000/api/month/${monthName}&${yearNumber}`,
+        `https://oneweekchallengeapp.herokuapp.com/api/month/${monthName}&${yearNumber}`,
         config
-      )
+      );
       //console.log(res.data)
 
       if (res.data) {
-        dispatch({ type: GET_MONTH, payload: res.data })
+        dispatch({ type: GET_MONTH, payload: res.data });
       }
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
     }
-  }
+  };
 
   const getMonthHandlerCleanup = () => {
-    cancelMonthToken.cancel(`Cancel Month Request`)
-  }
+    cancelMonthToken.cancel(`Cancel Month Request`);
+  };
 
   const changeMonthHandler = (monthName, yearNumber) => {
     // console.log(`CHANGEMONTHHANDLED: ${monthName}`)
@@ -51,8 +51,8 @@ const CalendarState = (props) => {
     dispatch({
       type: CHANGE_MONTH,
       payload: { monthName, yearNumber },
-    })
-  }
+    });
+  };
 
   return (
     <CalendarContext.Provider
@@ -69,7 +69,7 @@ const CalendarState = (props) => {
     >
       {props.children}
     </CalendarContext.Provider>
-  )
-}
+  );
+};
 
-export default CalendarState
+export default CalendarState;

@@ -19,7 +19,7 @@ const ConfirmEmail = () => {
   const sendToken = async (token) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/confirmaccount/${token}`
+        `https://oneweekchallengeapp.herokuapp.com/confirmaccount/${token}`
       );
 
       if (res.data) {

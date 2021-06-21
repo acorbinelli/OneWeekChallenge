@@ -17,7 +17,7 @@ const ConfirmEmailLanding = () => {
 
   return (
     <div>
-      <h1>Please confirm your email</h1>
+      <h1 style={{ color: "white" }}>Please confirm your email</h1>
     </div>
   );
 };

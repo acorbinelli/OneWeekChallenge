@@ -30,7 +30,7 @@ const Day = ({ token, dayID }) => {
     };
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/day/${dayID}`,
+        `https://oneweekchallengeapp.herokuapp.com/api/day/${dayID}`,
         config
       );
       if (res.data) {

@@ -23,7 +23,7 @@ const Bookings = ({
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/day/${localDayData._id}`,
+        `https://oneweekchallengeapp.herokuapp.com/api/day/${localDayData._id}`,
         { add: false, remove: true, booking: e },
         config
       );
