@@ -47,7 +47,7 @@ const Calendar = () => {
   } = useContext(CalendarContext);
   const { token } = useContext(AuthContext);
 
-  const [currentMonth, setCurrentMonth] = useState(JANUARY);
+  const [currentMonth, setCurrentMonth] = useState();
   // const [currentYear, setCurrentYear] = useState(2021);
 
   useEffect(() => {
@@ -69,6 +69,10 @@ const Calendar = () => {
     //eslint-disable-next-line
   }, [name, year, token]);
 
+  useEffect(() => {
+    setTodaysMonth();
+  }, []);
+
   const buttonChangeMonth = (action) => {
     if (action === "<") {
       if (monthsArray.indexOf(currentMonth) === 0) {
@@ -83,6 +87,12 @@ const Calendar = () => {
         setCurrentMonth(monthsArray[monthsArray.indexOf(currentMonth) + 1]);
       }
     }
+  };
+
+  const setTodaysMonth = () => {
+    const newDate = new Date();
+    const newMonth = newDate.getMonth();
+    setCurrentMonth(monthsArray[newMonth]);
   };
   /*  const buttonChangeYear = (action) => {
     if (action === "<") {

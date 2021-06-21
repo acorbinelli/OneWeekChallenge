@@ -1,13 +1,13 @@
-import "./App.css"
-import React from "react"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import AuthState from "./components/store/AuthState"
-import CalendarState from "./components/store/CalendarState"
+import AuthState from "./components/store/AuthState";
+import CalendarState from "./components/store/CalendarState";
 
-import Header from "./components/layout/Header"
-import Main from "./components/layout/Main"
-import ConfirmEmail from "./components/layout/ConfirmEmail"
+import Header from "./components/layout/Header";
+import Main from "./components/layout/Main";
+import ConfirmEmail from "./components/layout/ConfirmEmail";
 
 function App() {
   return (
@@ -16,13 +16,13 @@ function App() {
         <Header />
         <Switch>
           <CalendarState>
-            <Route path='/' exact component={Main} />
+            <Route path="/" exact component={Main} />
+            <Route path="/confirmaccount/:token" component={ConfirmEmail} />
           </CalendarState>
-          <Route path='/confirmaccount/:token' component={ConfirmEmail} />
         </Switch>
       </AuthState>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

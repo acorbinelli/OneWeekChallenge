@@ -1,31 +1,37 @@
-import React, { useContext, useEffect, useState } from "react"
-import AuthContext from "../store/authContext"
-import { Link, useParams } from "react-router-dom"
-import Button from "../UI/Button"
-import axios from "axios"
+import React, { useContext, useEffect, useState } from "react";
+import AuthContext from "../store/authContext";
+import { Link, useParams } from "react-router-dom";
+import Button from "../UI/Button";
+import axios from "axios";
 
 const ConfirmEmail = () => {
-  const [confirmState, setConfirmState] = useState({ msg: "" })
+  const [confirmState, setConfirmState] = useState({ msg: "" });
 
-  const { token } = useParams()
-  const { getUserCookies } = useContext(AuthContext)
+  const { token } = useParams();
+  const { getUserCookies } = useContext(AuthContext);
   useEffect(() => {
-    getUserCookies()
-    sendToken(token)
+    getUserCookies();
+    sendToken(token);
+
     //eslint-disable-next-line
-  }, [])
+  }, []);
 
   const sendToken = async (token) => {
     try {
       const res = await axios.get(
         `http://localhost:5000/confirmaccount/${token}`
-      )
+      );
 
-      setConfirmState({ ...confirmState, msg: res.data.msg })
+      if (res.data) {
+        setConfirmState({ ...confirmState, msg: res.data.msg });
+        setTimeout(() => {
+          window.close();
+        }, 5000);
+      }
     } catch (err) {
-      setConfirmState({ ...confirmState, msg: err.response.data.msg })
+      setConfirmState({ ...confirmState, msg: err.response.data.msg });
     }
-  }
+  };
 
   return (
     <div
@@ -42,11 +48,13 @@ const ConfirmEmail = () => {
     >
       <h1>Success</h1>
       <h2>{confirmState.msg}</h2>
-      <Link to='/'>
-        <Button classType='primary'>Go back to page</Button>
-      </Link>
+      {token && (
+        <Link to="/">
+          <Button classType="primary">Go back to page</Button>
+        </Link>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ConfirmEmail
+export default ConfirmEmail;

@@ -40,6 +40,8 @@ const Day = ({ token, dayID }) => {
           que: res.data.que,
           present: res.data.present,
         });
+      } else {
+        setLocalDayData({ ...localDayData });
       }
     } catch (err) {
       console.log(err.response.data.msg);
@@ -83,6 +85,9 @@ const Day = ({ token, dayID }) => {
             localDayData={localDayData}
             setShowBookingsHandler={setShowBookingsHandler}
             showBookings={showBookings}
+            cancelDayToken={cancelDayToken}
+            getDayData={getDayData}
+            token={token}
           />
         </Fragment>
       )}

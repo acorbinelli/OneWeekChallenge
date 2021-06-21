@@ -1,11 +1,11 @@
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(3, 1fr) repeat(6, 2fr);
+  grid-template-rows: repeat(2 1fr) repeat(7, 2fr);
   grid-template-areas:
     "month month month month month month month"
-    "weekday weekday weekday weekday weekday weekday weekday"
-    "0 1 2 3 4 5 6";
+    "weekday weekday weekday weekday weekday weekday weekday";
+
   gap: 0.5rem;
   height: 100%;
 

@@ -1,17 +1,17 @@
-import classes from "./SignupForm.module.css"
-import React, { useState, useContext, useEffect, useRef } from "react"
-import Modal from "../UI/Modal"
-import Button from "../UI/Button"
-import Input from "../UI/Input"
-import Logo from "./Logo"
-import autoClassHelper from "../../utils/autoClass-Helper"
+import classes from "./SignupForm.module.css";
+import React, { useState, useContext, useEffect, useRef } from "react";
+import Modal from "../UI/Modal";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
+import Logo from "./Logo";
+import autoClassHelper from "../../utils/autoClass-Helper";
 
-import authContext from "../store/authContext"
+import authContext from "../store/authContext";
 
 const beautifyText = (text) => {
-  const output = String(text).charAt(0).toUpperCase() + String(text).slice(1)
-  return output
-}
+  const output = String(text).charAt(0).toUpperCase() + String(text).slice(1);
+  return output;
+};
 
 const SignupForm = ({ toggle }) => {
   const [signupInfo, setSignupInfo] = useState({
@@ -21,48 +21,48 @@ const SignupForm = ({ toggle }) => {
     phone: "",
     password: "",
     confirmpassword: "",
-  })
+  });
   const { userSignup, isAuthenticated, clearAuthErrors, error } =
-    useContext(authContext)
+    useContext(authContext);
 
-  const nameInput = useRef()
-  const surnameInput = useRef()
-  const emailInput = useRef()
-  const phoneInput = useRef()
-  const passwordInput = useRef()
-  const confirmpasswordInput = useRef()
+  const nameInput = useRef();
+  const surnameInput = useRef();
+  const emailInput = useRef();
+  const phoneInput = useRef();
+  const passwordInput = useRef();
+  const confirmpasswordInput = useRef();
 
   useEffect(() => {
     if (isAuthenticated) {
-      toggle()
-      clearAuthErrors()
+      toggle();
+      clearAuthErrors();
     }
     //eslint-disable-next-line
-  }, [isAuthenticated])
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (error && typeof error === "object") {
       switch (error[0].param) {
         case "name":
-          nameInput.current.focus()
-          return
+          nameInput.current.focus();
+          return;
         case "surname":
-          surnameInput.current.focus()
-          return
+          surnameInput.current.focus();
+          return;
         case "email":
-          emailInput.current.focus()
-          return
+          emailInput.current.focus();
+          return;
         case "phone":
-          phoneInput.current.focus()
-          return
+          phoneInput.current.focus();
+          return;
         case "password":
-          passwordInput.current.focus()
-          return
+          passwordInput.current.focus();
+          return;
         case "confirmpassword":
-          confirmpasswordInput.current.focus()
-          return
+          confirmpasswordInput.current.focus();
+          return;
         default:
-          return
+          return;
       }
     }
     if (
@@ -70,56 +70,56 @@ const SignupForm = ({ toggle }) => {
       typeof error === "string" &&
       error === "Email already in use"
     ) {
-      const field = emailInput.current
-      field.focus()
+      const field = emailInput.current;
+      field.focus();
     }
-  }, [error])
+  }, [error]);
 
   useEffect(() => {
-    clearAuthErrors()
+    clearAuthErrors();
     //eslint-disable-next-line
-  }, [signupInfo])
+  }, [signupInfo]);
 
   const setSignupInfoHandler = (info) => {
-    setSignupInfo({ ...signupInfo, ...info })
-  }
+    setSignupInfo({ ...signupInfo, ...info });
+  };
   const setUserSignupHandler = () => {
-    userSignup(signupInfo)
-    !signupInfo && toggle()
-    isAuthenticated && toggle()
-  }
+    userSignup(signupInfo);
+    !signupInfo && toggle();
+    isAuthenticated && toggle();
+  };
 
   //BUG: fix this signluphandler
   const userSignupErrorHandler = (inputParam) => {
-    let message = ""
-    let errorClass = ""
+    let message = "";
+    let errorClass = "";
 
     if (typeof error === "object") {
       error.map((err) => {
         if (err.param === inputParam) {
-          message = err.msg
-          errorClass = "error"
+          message = err.msg;
+          errorClass = "error";
         }
-        return ""
-      })
+        return "";
+      });
     } else if (typeof error === "string") {
-      message = error
+      message = error;
     }
 
-    return { msg: message, classType: errorClass }
-  }
+    return { msg: message, classType: errorClass };
+  };
 
   return (
     <Modal toggle={toggle}>
       <Logo>
         <h1>LOGO</h1>
-        <i className='far fa-calendar-alt'></i>
+        <i className="far fa-calendar-alt"></i>
       </Logo>
       <form className={classes["signup-form"]}>
         <Input
-          nameTag='Name'
-          type='text'
-          state='name'
+          nameTag="Name"
+          type="text"
+          state="name"
           reference={nameInput}
           placeholder={
             typeof error === "object"
@@ -139,9 +139,9 @@ const SignupForm = ({ toggle }) => {
           onKeyDown={setUserSignupHandler}
         />
         <Input
-          nameTag='Last Name'
-          type='text'
-          state='surname'
+          nameTag="Last Name"
+          type="text"
+          state="surname"
           reference={surnameInput}
           placeholder={
             typeof error === "object"
@@ -166,9 +166,9 @@ const SignupForm = ({ toggle }) => {
           onKeyDown={setUserSignupHandler}
         />
         <Input
-          nameTag='Email'
-          type='email'
-          state='email'
+          nameTag="Email"
+          type="email"
+          state="email"
           reference={emailInput}
           placeholder={
             typeof error === "object"
@@ -193,9 +193,9 @@ const SignupForm = ({ toggle }) => {
           onKeyDown={setUserSignupHandler}
         />
         <Input
-          nameTag='Phone Number'
-          type='phone'
-          state='phone'
+          nameTag="Phone Number"
+          type="phone"
+          state="phone"
           reference={phoneInput}
           placeholder={
             typeof error === "object"
@@ -220,9 +220,9 @@ const SignupForm = ({ toggle }) => {
           onKeyDown={setUserSignupHandler}
         />
         <Input
-          nameTag='Password'
-          type='password'
-          state='password'
+          nameTag="Password"
+          type="password"
+          state="password"
           reference={passwordInput}
           placeholder={
             typeof error === "object"
@@ -247,9 +247,9 @@ const SignupForm = ({ toggle }) => {
           onKeyDown={setUserSignupHandler}
         />
         <Input
-          nameTag='Confirm Password'
-          type='password'
-          state='confirmpassword'
+          nameTag="Confirm Password"
+          type="password"
+          state="confirmpassword"
           reference={confirmpasswordInput}
           placeholder={
             typeof error === "object"
@@ -279,7 +279,7 @@ const SignupForm = ({ toggle }) => {
         <Button onClick={toggle}>Cancel</Button>
       </nav>
     </Modal>
-  )
-}
+  );
+};
 
-export default SignupForm
+export default SignupForm;

@@ -1,4 +1,4 @@
-import Cookies from "universal-cookie"
+import Cookies from "universal-cookie";
 
 import {
   USER_LOGIN,
@@ -12,21 +12,21 @@ import {
   GET_USER_PROFILE_DATA,
   GET_USER_PROFILE_DATA_FAIL,
   CLEAR_AUTH_ERRORS,
-} from "../types"
+} from "../types";
 
 const authReducer = (state, action) => {
-  const cookies = new Cookies()
+  const cookies = new Cookies();
   switch (action.type) {
     //SUBJECT:store token and id in cookies
     case USER_LOGIN:
       cookies.set("jwt", action.payload.token, {
         path: "/",
         maxAge: 36000,
-      })
+      });
       cookies.set("id", action.payload.id, {
         path: "/",
         maxAge: 36000,
-      })
+      });
 
       return {
         ...state,
@@ -34,19 +34,20 @@ const authReducer = (state, action) => {
         token: action.payload.token,
         isAuthenticated: true,
         error: "",
-      }
+      };
     case USER_LOGIN_FAIL:
+      console.log("failing");
       return {
         ...state,
         token: "",
         error: action.payload,
         isAuthenticated: false,
-      }
+      };
 
     //SUBJECT:clean state/cookies and logout user
     case USER_LOGOUT:
-      cookies.remove("jwt", { path: "/", domain: "localhost" })
-      cookies.remove("id", { path: "/", domain: "localhost" })
+      cookies.remove("jwt", { path: "/", domain: "localhost" });
+      cookies.remove("id", { path: "/", domain: "localhost" });
       return {
         ...state,
         id: "",
@@ -57,41 +58,42 @@ const authReducer = (state, action) => {
         phone: "",
         error: "",
         token: "",
-      }
+      };
 
     //SUBJECT:signup user and store jwt and id in state
     case USER_SIGNUP:
       cookies.set("jwt", action.payload.token, {
         path: "/",
         maxAge: 36000,
-      })
+      });
       cookies.set("id", action.payload.id, {
         path: "/",
         maxAge: 36000,
-      })
+      });
       return {
         ...state,
         isAuthenticated: true,
+
         token: action.payload.token,
         id: action.payload.id,
-      }
+      };
     case USER_SIGNUP_FAIL:
       return {
         ...state,
         token: "",
         error: action.payload,
         isAuthenticated: false,
-      }
+      };
 
     //SUBJECT:check for cookies and store in state
     case GET_USER_COOKIES:
-      const token = cookies.get("jwt")
-      const id = cookies.get("id")
+      const token = cookies.get("jwt");
+      const id = cookies.get("id");
 
       if (token) {
-        return { ...state, token: token, isAuthenticated: true, id: id }
+        return { ...state, token: token, isAuthenticated: true, id: id };
       }
-      return { ...state }
+      return { ...state };
 
     //SUBJECT:get current user object data and store in state
     case GET_USER_PROFILE_DATA:
@@ -102,29 +104,27 @@ const authReducer = (state, action) => {
         name: action.payload.name,
         surname: action.payload.surname,
         phone: action.payload.phone,
+        isConfirmed: action.payload.confirmed,
         error: "",
-      }
+      };
     case GET_USER_PROFILE_DATA_FAIL:
+      console.log("setting fail");
       return {
         ...state,
-        email: action.payload.email,
-        name: action.payload.name,
-        surname: action.payload.surname,
-        phone: action.payload.phone,
         error: action.payload,
-      }
+      };
     //SUBJECT: Update user profile data and token
     case USER_UPDATE:
-      cookies.remove("jwt", { path: "/", domain: "localhost" })
-      cookies.remove("id", { path: "/", domain: "localhost" })
+      cookies.remove("jwt", { path: "/", domain: "localhost" });
+      cookies.remove("id", { path: "/", domain: "localhost" });
       cookies.set("jwt", action.payload.newToken, {
         path: "/",
         maxAge: 36000,
-      })
+      });
       cookies.set("id", action.payload.id, {
         path: "/",
         maxAge: 36000,
-      })
+      });
 
       return {
         ...state,
@@ -133,21 +133,21 @@ const authReducer = (state, action) => {
         surname: action.payload.surname,
         phone: action.payload.phone,
         error: action.payload.error,
-      }
+      };
     case USER_UPDATE_FAIL:
       return {
         ...state,
         error: action.payload,
-      }
+      };
 
     case CLEAR_AUTH_ERRORS:
       return {
         ...state,
         error: "",
-      }
+      };
 
     default:
-      return {}
+      return {};
   }
-}
-export default authReducer
+};
+export default authReducer;
