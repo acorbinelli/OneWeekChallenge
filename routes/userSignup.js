@@ -49,7 +49,7 @@ router.post("/", userSignupChecks, async (req, res) => {
       if (err) throw err;
       Email({
         destination: user.email,
-        link: `https://corbyart.digital/confirmaccount/${token}`,
+        link: `https://corbyart.digital/#/confirmaccount/${token}`,
       });
       res.json({ token: token, id: user.id });
     });
