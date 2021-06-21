@@ -40,10 +40,13 @@ const AuthState = (props) => {
   //SUBJECT: User Login
   const userLogin = async (userInput) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/login", {
-        ...userInput,
-      });
-      console.log(res.data);
+      const res = await axios.post(
+        "https://oneweekchallengeapp.herokuapp.com/api/login",
+        {
+          ...userInput,
+        }
+      );
+
       if (res.data) {
         dispatch({ type: USER_LOGIN, payload: res.data });
       }
@@ -64,7 +67,7 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/user",
+        "https://oneweekchallengeapp.herokuapp.com/api/user",
 
         config
       );
@@ -101,9 +104,12 @@ const AuthState = (props) => {
   const userSignup = async (userInput) => {
     if (userInput) {
       try {
-        const res = await axios.post("http://localhost:5000/api/signup", {
-          ...userInput,
-        });
+        const res = await axios.post(
+          "https://oneweekchallengeapp.herokuapp.com/api/signup",
+          {
+            ...userInput,
+          }
+        );
         if (res.data) {
           dispatch({ type: USER_SIGNUP, payload: res.data });
         }
@@ -123,7 +129,7 @@ const AuthState = (props) => {
         },
       };
       const res = await axios.put(
-        "http://localhost:5000/api/user/update",
+        "https://oneweekchallengeapp.herokuapp.com/api/user/update",
         {
           ...userInput,
         },
